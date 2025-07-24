@@ -5,6 +5,7 @@ using UnityEngine;
 public class Person : MonoBehaviour
 {
     //defining traits
+    string gender = "male";
     int age = 20;
     string occupation = "hardresser";
 }
