@@ -8,7 +8,7 @@ public class PersonFactory : MonoBehaviour
 {
     //this class is to generate agents either by random or from pool
     //traits of Person-agents
-    string sex = "male";
+    string gender = "male";
     int age = 20;
     string occupation = "barberer";
     float WillingnesToConsume = 100;
