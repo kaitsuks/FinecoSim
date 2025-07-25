@@ -1,11 +1,23 @@
 
-//vaatimusmäärittely
-ohjelmiston suunnitelma, eli "vaatimusmäärittely" 
+//Ohjelmiston suunnitelma = vaatimusmäärittely 
 Linturin dokumentista voi ottaa inspiraatiota 
 Yhteistä: agentit ja simulaation syklit yms.
 
-//
+//PersonFactory 
+1. Tehtävä on 
+(1) luoda Person-olioita ja (2) 
+antaa niiden jäsenmuuttujille/parametreille alkuarvot. 
 
+2. (1) arpomalla tai (2) satunnaisesti
+(1) Arpominen tapahtuu ottamalla ennaltamäärätyistä arvoista
+"pool" -> kaikki keskiarvot ovat aina vakioita
+"laskuri" ????
+(2) Satunnainen valinta voi myös toimia
 
+3. Silmukka toistuu n-kertaa ja arpoo noita ominaisuuksia.
+Silmukka voisi valita "poolista" tai "laskurista"
 
+4. Alkukokeilu 30-100:lla Person-oliolla.
 
+//visualisointi
+Aluksi konsolitulostus. Jatko epävarma.
