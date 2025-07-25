@@ -19,5 +19,19 @@ Silmukka voisi valita "poolista" tai "laskurista"
 
 4. Alkukokeilu 30-100:lla Person-oliolla.
 
+-Manuaalinen olioiden tekeminen on liian työslästä
+Muuttujat olioille: 
+-sukupuoli 
+-ikä 
+-ammatteja 
+-maksuhalukkuutta 
+-luonne (esim. turhamaisuus)
+-Tulotason 
+(aluksi: asetettu ja satunnaistettu, 
+jatkossa: riippuvainen yhteiskunnallisista tekijöistä (työllisyydestä, suhdanteista))
+
 //visualisointi
 Aluksi konsolitulostus. Jatko epävarma.
+
+//musiikki
+mahdollinen
