@@ -1,7 +1,6 @@
-
 //Ohjelmiston suunnitelma = vaatimusmäärittely 
-Linturin dokumentista voi ottaa inspiraatiota 
-Yhteistä: agentit ja simulaation syklit yms.
+-inspiraatio: Linturin dokumentista voi ottaa inspiraatiota 
+-Yhteistä: agentit ja simulaation syklit yms.
 
 //PersonFactory 
 1. Tehtävä on 
@@ -18,7 +17,6 @@ antaa niiden jäsenmuuttujille/parametreille alkuarvot.
 Silmukka voisi valita "poolista" tai "laskurista"
 
 4. Alkukokeilu 30-100:lla Person-oliolla.
-
 -Manuaalinen olioiden tekeminen on liian työslästä
 Muuttujat olioille: 
 -sukupuoli 
@@ -35,3 +33,81 @@ Aluksi konsolitulostus. Jatko epävarma.
 
 //musiikki
 mahdollinen
+
+
+//Mietin noita asioita käsiteltäväksi, 
+-simulaatiossa on syytä olla muutama rinnakkainen asia. 
+Yhden asian tutkiminen ei periaatteessa vaadi simulaatiota. 
+Tutkitaan siis ihmisten parturi/kampaamo-käyntejä. 
+Voi olla sama asia, sukupuoli vain on eri. Ja palvelun hinta. 
+Muuten käsitellään yhtenvästi. 
+Voidaan tosin olettaa, että naiset ovat "turhamaisempia". 
+Päinvastoin taas voidaan olettaa, että alkoholin kohdalla miehet ovat persompia.
+
+//Tarkasteltavia asioita: 
+-kahvilla tai limulla/jäätelöllä käynti baarissa, 
+-lounasruokailu ravintolassa, 
+-illallisruokailu ravintolassa, 
+-alkoholin nauttiminen ravintolassa. 
+-alkoholin nauttiminen kotona,
+-alkoholin osto kaupasta, tuonti (Virosta), oma valmistus. 
+-alkoholin käytön vähentäminen.
+
+//Persoona: 
+-palkka 
+-säästötili 
+-palkkapäivä. 
+-Tukan pitää kasvaa, 
+-kampaamoon meno kun: häiritsevän pitkä, kampaus/väri ei enää miellytä
+-sukupuoli, 
+-ikä 
+-"viinanhimon" jne
+
+//Käyttäjä/valtio/hallitus säätää: (vaatimusmäärittelyyn)
+-välitöntä (marginaali)veroa
+-välillistä (arvonlisä)veroa
+-haittaveroja kuten alkoholiveroa. 
+-Palkkakehitys: ei monimutkaisia työmarkkinamekanismeja.
+-Valtion menot, tulot ja lainanotto voisi olla mukana könttänä.
+-(hallitukseen) tyytyväisyysindikaattorin.
+
+//toteutus
+-Aluksi arvotaan ominaisuudet, ei vielä "poolia"
+-Parturikampaamo ja ravintola-ala ovat erityisen suhdanneherkkiä, siksi sopivat tähän. 
+-Muitakin: elokuvakäynnit, festivaali, hotelli- ja matkailuala
+ 
+//ominaisuuksia: 
+
+//metodeja: 
+//vaatimusmäärittely 
+
+//PersonFactory 
+-arpoo ominaisuuksia tietyillä todennäköisyyksillä - joita on käyttäjän voitava muuttaa. 
+
+//todenäköisyydet
+-omassa tiedostossa 
+-niihin voi vaikuttaa käyttöliittymän editorilla
+-käyttäjän ei tule pitäisi manipuloida C#-koodia. 
+-Tässä vaiheessa voi muokata julkisia (public) ominaisuuksia Unity-ohjelmassa, mutta ei toimi lopullisessa 
+-tavoite: internet-sovellus
+-erilliset ladattavat sovellukset ovat parempia siinä, että käyttäjä huolehtii tallennustilasta ja muusta kapasiteetista. 
+-lokitiedostot ovat suuria
+
+//Arkkitehtuurin kannalta
+-Luokkien on parasta olla samankokoisia
+-Suuria luokkia voi hajauttaa (esim. Person tai muun agentin pitäisi koostua osista, aineenvaihdunta, Talous)
+-Pienissä joukoissa satunnaisuus on huono, poolin/laskurin käyttö on tosiaan perusteltua 
+-Arvonnan jälkeen ei haittaa jos esim. kaikki ovat sattumalta naisia/miehiä/juoppoja 
+Määrät voi toki laittaa näkyville ja pitääkin.
+
+//voisi alustavasti miettiä
+-työllisyysvaikutuksia
+-tulonmuodostusta 
+
+//kiinnostavaa olisi nähdä 
+-perustetaanko tai lopetetaanko yrityksiä
+-vaikutus kokonaistyöllisyyteen tai sosiaaliturvan tarpeeseen
+-vähennetäänkö henkilökuntaa. 
+
+//yritykset
+-(mahdollisimman) yksinkertainen kustannusrakenne.
