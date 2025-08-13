@@ -81,8 +81,12 @@ Svenska
 1. Introduktion
 
     1.1 Avsikt och omtäckning (kattavuus)
+    Avsikten är att simulera den finländska nationalekonomin från synvinkeln av
+    finansminister/staten
+    "Kattavuus" är frö tillfället begränsat tilll två brascher.
     1.2 Produkt och miljö
     1.3 Definitioner, termet och förkortningar
+    BNP = bruttonationalprodukt
     1.4 Hänvisningar
     1.5 En allmän vy på dokumentet
 
@@ -90,6 +94,8 @@ Svenska
 
     2.1 Miljö
     2.2 Funktion
+    Ett år är indelat i fyra delar, varje del bestående av 3 delar. Innan de nästa tre delarna simuleras genom
+    att trycka på "simulation"-knappen kan spelaren enligt eget tycke ändra på parametrar.
     2.3 Användare
     2.4 Allmänna begränsningar
     2.5 Antangan och beroendeskap
@@ -118,9 +124,12 @@ Svenska
 
     6.1 prestationsförmåga och vasteajat
     6.2 tillgänglighet, återhämtning, säkerhet, skydd
-    6.3 Upprätthållbarhet
+    Simulationen är inom öppen källkod. Simulationen ska i slutändan fungera i en internetläsare.    6.3 Upprätthållbarhet
     6.4 Siirrettävyys ja yhteensopivuus
     6.5 Operering
+    Spelaren kan inmata eller välja värden till parametrarna. När spelaren är nöjd med sina val kan han/hon
+    trycka på en knapp med texten "simulation". När simulationen är slutförd visas ändringarna åt spelaren i
+    nummer- eller bildformat.
     6.6 Användbarhet, effektivitet av bruk, användarnöjdhet
 
 7. Planeringsbegränsningar
@@ -138,6 +147,9 @@ English
 1. Introduction
 
     1.1 Purpouse and kattavuus
+    The intention is to simulate the Finnish national economy from the viewpoint of the
+    financial minister/state. Extension of the simulation is currently limited to two
+    branches.
     1.2 Producta and environment
     1.3 Definitions, terms and abbrevations
     1.4 Viitteet
@@ -178,6 +190,9 @@ English
     6.3 Maintainability
     6.4 Transferability and yhteensopivuus
     6.5 Operation
+    The player may input values to parameters. When the player is happy with his/her
+    choices he/she can press the button "simulation". When the simulation is complete
+    the changes are shown in text or picture format.
     6.6 Usability, effeciency of use, user satisfaction
 
 7. Plannning limitations

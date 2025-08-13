@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86;
 
 public class Company : MonoBehaviour
 {
@@ -39,8 +40,20 @@ public class Company : MonoBehaviour
     //  3. hotel is not good enough
     //  4. no hotel exists
     //reason for using hotel:
-    //  1. ????
+    //  1. tourism (foreign and native)
+    //  2. due to work/education not having own housing
 
+    //food
+    //eating lunch/dinner/food at a restaurant
+    //drinking coffe/coke etc.
+
+    //alcohol
+    //alcohol consumed in restaurant
+    //alcohol consumed at home
+    //alcohol bought from store
+    //alcohol brought from Estonia
+    //alcohol prepared at home 
+    //reduction of alcohol consumption
 
     //parameter
     //string reputationHotel = "5 star"
