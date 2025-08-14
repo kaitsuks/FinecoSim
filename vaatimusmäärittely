@@ -71,7 +71,7 @@
 
     7.3 Ohjelmistorajoitteet
     7.4 Muut rajoitteet
-    Harjoittelijalla on puuttelinen osaaminen ohjelmoinnissa.
+    Harjoittelijalla on puutteellinen osaaminen ohjelmoinnissa.
 
 8. Hylätyt ratkaisuvaihtoehdot
 
@@ -186,9 +186,13 @@ English
 6. Other abilities
 
     6.1 performance ability and vasteajat
+    Time delay from player action is of low concern due to reaction time being unimportant in the game.
     6.2 availability, recovery, safety, protections
+    The code is open source. The application is to be run in a web browser to maximise availability.
     6.3 Maintainability
+    The aim is to concentrate on the code so as to keep the most changes in the code.
     6.4 Transferability and yhteensopivuus
+    The code base is to be transferable as easy as possible to other programming languages.
     6.5 Operation
     The player may input values to parameters. When the player is happy with his/her
     choices he/she can press the button "simulation". When the simulation is complete
@@ -201,6 +205,7 @@ English
     7.2 Hardware limitations
     7.3 Software limitations
     7.4 Other limitations
+    The practicant has lacking skills in programming.
 
 8. Abandoned solution alternatives
 
