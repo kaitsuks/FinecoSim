@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class State : MonoBehaviour
@@ -11,9 +12,15 @@ public class State : MonoBehaviour
     float addedValueTaxFood = 24f;
     float addedValueTaxAlchohol = 24f;
     float addedValueTaxTobacco = 24f;
+    float addedValueTaxSugar = 0f;
     float addedValueTaxServiceIndustry = 24f;
     float addedValueTaxLuxury = 24f;
     float addedValueTaxCleaningService = 24f;
+
+    //wages
+    float wageBarber = 2000f;
+    float wageHotelWorker = 2000f;
+    float wageHotelBoss = 2000f;
 
     //inheritance tax
     bool inteheritanceTaxIsProgressive = true;
@@ -33,4 +40,10 @@ public class State : MonoBehaviour
     float hospitals = 20f; //hyvinvointialue(?)
     float elderlyCare = 20f; //hyvinvointialue(?)
     float treatmentAlcholism = 20f; //hyvinvointialue(?)
+
+    float loans = 1f;
+
+    float governmentApprovalPercent = 50f;
+
+    float "marginaalivero" = 1f;
 }

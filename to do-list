@@ -15,7 +15,7 @@ antaa niiden jäsenmuuttujille/parametreille alkuarvot.
 Silmukka voisi valita "poolista" tai "laskurista"
 
 4. Alkukokeilu 30-100:lla Person-oliolla.
--Manuaalinen olioiden tekeminen on liian työslästä
+-Manuaalinen olioiden tekeminen on liian työlästä
 Muuttujat olioille: 
 (aluksi: asetettu ja satunnaistettu, 
 jatkossa: riippuvainen yhteiskunnallisista tekijöistä (työllisyydestä, suhdanteista))
@@ -36,36 +36,9 @@ Voidaan tosin olettaa, että naiset ovat "turhamaisempia".
 Päinvastoin taas voidaan olettaa, että alkoholin kohdalla miehet ovat persompia.
 
 //Tarkasteltavia asioita: 
--kahvilla tai limulla/jäätelöllä käynti baarissa, 
--lounasruokailu ravintolassa, 
--illallisruokailu ravintolassa, 
--alkoholin nauttiminen ravintolassa. 
--alkoholin nauttiminen kotona,
--alkoholin osto kaupasta, tuonti (Virosta), oma valmistus. 
--alkoholin käytön vähentäminen.
-
-//Persoona: 
--palkka 
--säästötili 
--palkkapäivä 
--Tukan pitää kasvaa, 
--kampaamoon meno kun: häiritsevän pitkä, kampaus/väri ei enää miellytä
--sukupuoli, 
--ikä 
--"viinanhimon" jne
-
-//Käyttäjä/valtio/hallitus säätää: (vaatimusmäärittelyyn)
--välitöntä (marginaali)veroa
--välillistä (arvonlisä)veroa
--haittaveroja kuten alkoholiveroa. 
--Palkkakehitys: ei monimutkaisia työmarkkinamekanismeja.
--Valtion menot, tulot ja lainanotto voisi olla mukana könttänä.
--(hallitukseen) tyytyväisyysindikaattorin.
 
 //toteutus
 -Aluksi arvotaan ominaisuudet, ei vielä "poolia"
--Parturikampaamo ja ravintola-ala ovat erityisen suhdanneherkkiä, siksi sopivat tähän. 
--Muitakin: elokuvakäynnit, festivaali, hotelli- ja matkailuala
  
 //ominaisuuksia: 
 
@@ -80,7 +53,6 @@ Päinvastoin taas voidaan olettaa, että alkoholin kohdalla miehet ovat persompia.
 -niihin voi vaikuttaa käyttöliittymän editorilla
 -käyttäjän ei tule pitäisi manipuloida C#-koodia. 
 -Tässä vaiheessa voi muokata julkisia (public) ominaisuuksia Unity-ohjelmassa, mutta ei toimi lopullisessa 
--tavoite: internet-sovellus
 -erilliset ladattavat sovellukset ovat parempia siinä, että käyttäjä huolehtii tallennustilasta ja muusta kapasiteetista. 
 -lokitiedostot ovat suuria
 
@@ -96,9 +68,4 @@ Määrät voi toki laittaa näkyville ja pitääkin.
 -tulonmuodostusta 
 
 //kiinnostavaa olisi nähdä 
--perustetaanko tai lopetetaanko yrityksiä
--vaikutus kokonaistyöllisyyteen tai sosiaaliturvan tarpeeseen
--vähennetäänkö henkilökuntaa. 
-
-//yritykset
--(mahdollisimman) yksinkertainen kustannusrakenne.
+-vaikutus kokonaistyöllisyyteen tai sosiaaliturvan tarpeeseen 
