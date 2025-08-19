@@ -69,3 +69,46 @@ M‰‰r‰t voi toki laittaa n‰kyville ja pit‰‰kin.
 
 //kiinnostavaa olisi n‰hd‰ 
 -vaikutus kokonaistyˆllisyyteen tai sosiaaliturvan tarpeeseen 
+
+//-yksinkertaisuus:
+Turhaa tietoa simulaation kannalta (Person.cs):
+string savingsAccount = "12345678";
+    int dayOfWage = 2;
+float weightPerson = 80f;
+    float heightPerson = 180f;
+string skincolour = "white";
+
+//PersonFactoryss‰ pit‰isi ominaisuuksia arpoa siten, ett‰ ne vastaavat tiettyj‰ jakaumia. Voi siis olla painotetut random-luvut ja/tai tietyt "poolit" rooleja ja demografisia ominaisuuksia varten.
+Kaitsuks
+
+//yksinkertaisia kokeiluja:
+-kannattaa tehd‰ usein yksinkertaisia kokeiluja esim.
+-meneekˆ agentti parturiin, kun tukka on kasvanut tarpeeksi pitk‰ksi 
+-tuleeko tilille palkkaa
+-aluksi konsolitulostus, pikuu hiljaa visualisointi
+
+//agenteille
+
+Simulaation aloituksessa: 
+-aluksi voi olla 5 vuoden simulointi, ei syntym‰‰, ei kuolemaa, i‰ll‰ ei ole v‰li‰
+-pitemm‰ss‰ simulaatiossa mm. kulutustottumukset voivat muuttua
+
+-Vaatimusm‰‰rittely: n‰ytt‰‰ jo varsin hyv‰lt‰
+-prompts-tiedosto: n‰ytt‰‰ pikemminkin Use Cases -tiedostolta
+
+-Teko‰lylle kirjoitettava prompt voisi olla jotain seuraavan kaltaista mutta englanniksi:
+Laadi ohjelmakoodi (C#) taloussimulaatiota varten, 
+jossa tarkasteltavina asioina ovat ravintola-ala ja parturikampaamoala. 
+Tarkoitus on tarkastella erityisesti (1) arvonlis‰veron ja (2) muiden verojen 
+vaikutusta (1) kulutukseen ja sen kautta (2) tyˆllisyyteen ja (3) valtion verotuloihin. 
+Simulaatio toteutetaan k‰ytt‰en Unityn luokista muodostettuja olioita 
+itsen‰isin‰ agentteina, jotka vastaavat v‰estˆn demografista rakennetta karkeasti. 
+Olioiden m‰‰r‰ on s‰‰dett‰viss‰, mutta esimerkiksi 300 aluksi. 
+K‰ytt‰j‰ voi hallituksen ominaisuudessa s‰‰t‰‰ (1) eri veroja ja 
+(2) muita parametrej‰ (aukioloaikoja?) 
+(3) ja ajaa simulaatiota useita kierroksia (p‰iv‰/viikko/kuukausi?) 
+useiden virtuaalisten vuosien ajan. 
+Myˆhemmin simulaatiota voidaan laajentaa pitempiin ajanjaksoihin, 
+jolloin agentit syntyv‰t, ik‰‰ntyv‰t ja kuolevat.
+
+ChatGPT, in English:
