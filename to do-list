@@ -1,4 +1,17 @@
-//Ohjelmiston suunnitelma = vaatimusmäärittely 
+//keskittyäminen laatia "prompt" tekoälylle käyttäen pohjana
+-aluksi konsolitulostusta
+-tähän asti tehtyjä määrittelyjä, 
+-sovelluksen kuvausta ja 
+-vaatimusmäärittelyä, 
+-työkieleksi englanti tekoälylle
+
+//GUI (graafinen käyttöliittymä)-ratkaisu erikseen tekoälyltä
+-ei juuri ole mietitty vielä (pari kuvaketta löytyy)
+-GUI eli graafinen käyttöliittymä kannattaa tehdä/pyytää erikseen. 
+-Ainakin ChatGPT todennäköisesti voi ehdottaakin sellaisen tekemistä. 
+-MVC (Model View Controller) on valittu 
+
+ -keskittyminen: toimiva simulaatio, ensin kohtalaisen yksinkertainen määrittely
 
 //PersonFactory 
 1. Tehtävä on 
@@ -28,23 +41,12 @@ mahdollinen
 
 //Mietin noita asioita käsiteltäväksi, 
 -simulaatiossa on syytä olla muutama rinnakkainen asia. 
-Yhden asian tutkiminen ei periaatteessa vaadi simulaatiota. 
-Tutkitaan siis ihmisten parturi/kampaamo-käyntejä. 
-Voi olla sama asia, sukupuoli vain on eri. Ja palvelun hinta. 
-Muuten käsitellään yhtenevästi. 
-Voidaan tosin olettaa, että naiset ovat "turhamaisempia". 
-Päinvastoin taas voidaan olettaa, että alkoholin kohdalla miehet ovat persompia.
-
-//Tarkasteltavia asioita: 
+-tutkitaan siis ihmisten parturi/kampaamo-käyntejä. 
+-oletuksia: naiset ovat "turhamaisempia", alkoholin kohdalla miehet ovat persompia.
 
 //toteutus
 -Aluksi arvotaan ominaisuudet, ei vielä "poolia"
  
-//ominaisuuksia: 
-
-//metodeja: 
-//vaatimusmäärittely 
-
 //PersonFactory 
 -arpoo ominaisuuksia tietyillä todennäköisyyksillä - joita on käyttäjän voitava muuttaa. 
 
@@ -110,5 +112,3 @@ Käyttäjä voi hallituksen ominaisuudessa säätää (1) eri veroja ja
 useiden virtuaalisten vuosien ajan. 
 Myöhemmin simulaatiota voidaan laajentaa pitempiin ajanjaksoihin, 
 jolloin agentit syntyvät, ikääntyvät ja kuolevat.
-
-ChatGPT, in English:
