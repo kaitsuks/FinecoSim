@@ -1,54 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEngine;
+// This file defines the Person class, which represents a single agent in the simulation.
+// Each Person has attributes (age, money, preferences, etc.) that influence behavior.
 
-public class Person : MonoBehaviour
+using System;
+// Imports base .NET system utilities like Random, Console, etc.
+
+public class Person
+// Declares the Person class. Each object of this type is one simulated person.
 {
-    //defining traits
-    string gender = "male";
-    int birthyear = 1990;
-    int age = 20;
-    float wage = 2000f;
-    string savingsAccount = "12345678";
-    int dayOfWage = 2;
-    string occupation = "hardresser";
-    string education = "master's degree";
+    // Properties represent the agent's traits and economic state.
 
-    //changes to person status
-    //"if a year passes the age increases by 1
-    //int age = int age + 1;
-    //"if age reaches "death" the agent becomes 0 years old, a "baby"
+    // The age of the person (not very important in the first version).
+    public int Age { get; set; }
 
-    //consumption habits
-    //alcohol
-    string consumptionHabitsAlcoholPlace = "none"; // "home" "restaurant"
-    string consumptionHabitsAlcohonAmmount = "none";
-    string consumptionHabitsAlcohonAmmountChange = "none"; //"reducation", "no", "increase"
+    // How much money the person currently has.
+    public float Money { get; set; }
 
-    //icecream
-    string consumptionHabitsIcecream = "low";
-    
-    //lunch
-    string consumptionHabitsLunchPlace = "home"; // "restaurant", "school"
-    
-    //dinner
-    string consumptionHabitsDinnerPlace = "home"; // "restaurant", "school"
+    // Gender attribute, used to model different consumption patterns.
+    public string Gender { get; set; }
 
-    //barbeber
-    string consumptionHabitBarber = "does not like hair";
+    // The current hairstyle state of the person (short, medium, long).
+    public string HairStyle { get; set; }
 
-    //cinema, movies, festivals, travel
-    string consumptionHabitsCinema = "None";
-    string consumptionHabitsFestivals = "None";
-    string consumptionHabitsTravel = "None";
+    // Tracks how many weeks since last haircut (used in haircut decisions).
+    public int WeeksSinceHaircut { get; set; }
 
-    // person statuses
-    float weightPerson = 80f;
-    float heightPerson = 180f;
-    string personality = "funny";
-    string skincolour = "white";
-    string hairType = "short";
-    float hairGrowth = 1f;  
+    // Constructor initializes a new Person with default values.
+    public Person(int age, float money, string gender, string hairStyle)
+    {
+        // Assign the provided age to the Age property.
+        Age = age;
+
+        // Assign the provided money value to the Money property.
+        Money = money;
+
+        // Assign the provided gender string to the Gender property.
+        Gender = gender;
+
+        // Assign the provided hairstyle string to the HairStyle property.
+        HairStyle = hairStyle;
+
+        // Start haircut counter at 0 when a new person is created.
+        WeeksSinceHaircut = 0;
+    }
+
+    // Method that simulates one "tick" of time for this person (e.g., a week).
+    public void UpdateWeekly()
+    {
+        // Every week, the counter since last haircut increases by one.
+        WeeksSinceHaircut++;
+    }
+
+    // Determines if the person wants a haircut this week.
+    public bool WantsHaircut()
+    {
+        // Return true if it's been 8 or more weeks since last haircut.
+        return WeeksSinceHaircut >= 8;
+    }
+
+    // Called when the person actually gets a haircut.
+    public void GetHaircut()
+    {
+        // Reset the haircut counter back to 0 weeks.
+        WeeksSinceHaircut = 0;
+    }
 }
