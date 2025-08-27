@@ -1,88 +1,57 @@
-// This file runs the actual simulation loop.
-// It controls time progression, applies taxes, and gathers results.
-
-using System;
-// For Console output and basic utilities.
-
 using System.Collections.Generic;
-// For using List<Person>.
+using UnityEngine;
 
-public class SimulationController
-// Declares the SimulationController class, main manager of the sim.
+/// <summary>
+/// Runs the actual simulation loop in Unity.
+/// Attach this script to an empty GameObject.
+/// </summary>
+public class SimulationController : MonoBehaviour
 {
-    // List of all agents (persons) in the simulation.
+    public int populationSize = 100;
+    public State government;
+    public Company hairdresserCompany;
+
     private List<Person> people;
 
-    // Current VAT rate (Value-Added Tax) applied to spending.
-    private float vatRate;
-
-    // Tracks total tax revenue collected by the government.
-    private float taxRevenue;
-
-    // Constructor initializes the simulation with a given number of people.
-    public SimulationController(int populationSize, float initialVatRate)
+    void Start()
     {
-        // Create the agents using PersonFactory.
+        // Create population
         people = PersonFactory.CreatePeople(populationSize);
 
-        // Store the VAT rate.
-        vatRate = initialVatRate;
+        // Link government to companies
+        hairdresserCompany.government = government;
 
-        // Start with zero tax revenue.
-        taxRevenue = 0f;
-    }
-
-    // Runs the simulation for a given number of weeks.
-    public void Run(int weeks)
-    {
-        // Loop over the number of weeks to simulate.
-        for (int week = 1; week <= weeks; week++)
+        // Run 10 weeks of simulation
+        for (int week = 1; week <= 10; week++)
         {
-            // Write a message showing which week is running.
-            Console.WriteLine($"--- Week {week} ---");
-
-            // Process weekly behavior of all agents.
-            SimulateWeek();
-
-            // Show government’s current tax revenue after this week.
-            Console.WriteLine($"Cumulative Tax Revenue: {taxRevenue}");
+            SimulateWeek(week);
         }
+
+        Debug.Log("Simulation finished.");
+        Debug.Log($"Government net budget: {government.GetNetBudget()}");
     }
 
-    // Handles weekly events like haircuts and restaurant visits.
-    private void SimulateWeek()
+    private void SimulateWeek(int week)
     {
-        // Loop through each person in the population.
+        Debug.Log($"--- Week {week} ---");
+
         foreach (var person in people)
         {
-            // Update their internal counters (e.g., weeks since haircut).
             person.UpdateWeekly();
 
-            // If this person wants a haircut:
             if (person.WantsHaircut())
             {
-                // Define the base cost of a haircut.
-                float haircutPrice = 20f;
-
-                // Add VAT to the base price.
-                float totalPrice = haircutPrice * (1 + vatRate);
-
-                // If the person can afford it:
-                if (person.Money >= totalPrice)
-                {
-                    // Deduct the cost from their money.
-                    person.Money -= totalPrice;
-
-                    // Reset haircut counter.
-                    person.GetHaircut();
-
-                    // Add the VAT portion to tax revenue.
-                    taxRevenue += haircutPrice * vatRate;
-
-                    // Print a message about the haircut event.
-                    Console.WriteLine($"{person.Gender} aged {person.Age} got a haircut. Remaining money: {person.Money}");
-                }
+                hairdresserCompany.ServeCustomer(person, government.vatHairdresser);
+                person.GetHaircut();
+                Debug.Log($"{person.Gender} aged {person.Age} got a haircut. Money left: {person.Money}");
             }
+        }
+
+        // Once a month, pay wages
+        if (week % 4 == 0)
+        {
+            hairdresserCompany.PayWages(people);
+            Debug.Log("Wages paid to citizens.");
         }
     }
 }
