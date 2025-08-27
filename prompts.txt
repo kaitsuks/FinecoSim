@@ -1,0 +1,34 @@
+prompts
+
+hotel
+"A hotel is built"
+"A hotel is demolished"
+"The level of the hotel increased from {previous_level} to {new_level}
+"A customer visited the hotel"
+"A hotel hired an employee"
+
+barber
+"A barbershop is built"
+"A barbershop is closed down"
+"A customer visited the barbershop"
+"A barbershop hired an employee"
+"
+
+person
+"The hotel is too expensive"
+"The hotel is too low quality"
+"The barbershop has no open times"
+"The barbershop was not good"
+"The barbershop was good"
+
+statistics
+"GDP rose by x"
+"The productivity rose by x"
+"Unemployement rose/reduced by x"
+"Employement rose/reduced by x"
+
+game commands
+"Begin simulation?"
+"The simulation has started"
+"The simulation is done"
+"The results of the simulation are as follows:"

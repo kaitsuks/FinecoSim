@@ -1,1 +1,212 @@
+//kopio Wikipediasta
+1. Johdanto
 
+    1.1 Tarkoitus ja kattavuus
+    Tarkoitus on simuloida Suomen kansantaloutta valtiovarainministeriön/valtion näkökulmasta
+    Kattavuus on tällä hetkellä rajoitettu kahteen toimialaan.
+
+    1.2 Tuote ja ympäristö
+    1.3 Määritelmät, termit ja lyhenteet
+    BNP = bruttokansantuote
+    1.4 Viitteet
+    1.5 Yleiskatsaus asiakirjaan
+
+2. Yleiskuvaus
+
+    2.1 Ympäristö
+    2.2 Toiminta
+    Yksi vuosi on jaettu neljään kolmen kuukauden osaan. Ennen kuin seuraava kolme kuukautta
+    simuloidaan painamalla "simulaatio"-nappia voi pelaaja muuttaa parametrejä oman makunsa mukaan.
+    2.3 Käyttäjät
+    Sovellusta voi käyttää yksi henkilö kerrallaan
+    2.4 Yleiset rajoitteet
+    2.5 Oletukset ja riippuvuudet
+
+
+3. Tiedot ja tietokanta
+
+    3.1 Tietosisältö
+
+        3.1 Käsitteet omiin alakohtiinsa
+
+    3.2 Käyttöintensiteetti
+    3.3 Kapasiteettivaatimukset
+    3.4 Tiedostot ja asetustiedostot
+
+4. Toiminnot
+
+    4.1 Kukin toiminto omaan alakohtaansa
+
+5. Ulkoiset liittymät
+
+    5.1 Laitteistoliittymät
+    5.2 Ohjelmistoliittymät
+    5.3 Tietoliikenneliittymät
+
+6. Muut ominaisuudet
+
+    6.1 Suorituskyky ja vasteajat
+    Vasteajan kanssa ei tarvinne olla tarkkana koska korkea reaktionopeus ei ole oleellinen pelissä menestymisen kannalta.
+
+    6.2 Saavutettavuus, toipuminen, turvallisuus, suojaukset
+    Simulaatio on avoimen lähdekoodin piirissä.
+    Simulaatio pyritään saamaan toimiaan internetselaimessa saavutettavuuden maksimoiseksi.
+
+    6.3 Ylläpidettävyys
+    Tavoite on pitää pääpaino koodissa, jolloin suurimmat tulevat muutokset tulisivat koodiin.
+
+    6.4 Siirrettävyys ja yhteensopivuus
+    Suunnitelma on saada koodipohja mahdollisimman sujuvaksi siirtää muille ohjelmointikielille C#-ohjelmointikielestä.
+
+    6.5 Operointi
+    Pelaaja voi kirjoittaa tai valita arvon parametreille. Pelaajan ollessa tyytyväinen valintoihinsa hän voi painaa "simulaatio"-nappia.
+    Simulaation loputtua pelaajalle esitetään tapahtuneet muutokset numero- ja/tai kuvamuodossa.
+
+    6.6 Käytettävyys (Usability), käytön tehokkuus, käyttäjien tyytyväisyys
+
+7. Suunnittelurajoitteet
+
+    7.1 Standardit
+    7.2 Laitteistorajoitteet
+
+    7.3 Ohjelmistorajoitteet
+    7.4 Muut rajoitteet
+    Harjoittelijalla on puutteellinen osaaminen ohjelmoinnissa.
+
+8. Hylätyt ratkaisuvaihtoehdot
+
+9. Jatkokehitysajatuksia
+
+Svenska
+1. Introduktion
+
+    1.1 Avsikt och omtäckning (kattavuus)
+    Avsikten är att simulera den finländska nationalekonomin från synvinkeln av
+    finansminister/staten
+    "Kattavuus" är frö tillfället begränsat tilll två brascher.
+    1.2 Produkt och miljö
+    1.3 Definitioner, termet och förkortningar
+    BNP = bruttonationalprodukt
+    1.4 Hänvisningar
+    1.5 En allmän vy på dokumentet
+
+2. Allmän vy
+
+    2.1 Miljö
+    2.2 Funktion
+    Ett år är indelat i fyra delar, varje del bestående av 3 delar. Innan de nästa tre delarna simuleras genom
+    att trycka på "simulation"-knappen kan spelaren enligt eget tycke ändra på parametrar.
+    2.3 Användare
+    2.4 Allmänna begränsningar
+    2.5 Antangan och beroendeskap
+
+3. Information och databas
+
+    3.1 Informationsinnehåll
+
+        3.1 Begreppen inom sina underkategorier
+
+    3.2 Käyttöintensiteetti
+    3.3 kapacitetskrav
+    3.4 Filer och installationsfiler
+
+4. Funktioner
+
+    4.1 Var sin funktion i sin egen underkategori
+
+5. Yttre kopplingar
+
+    5.1 Hårdvarokoppplingar
+    5.2 Mjukvarokopplingar
+    5.3 Närverkskopplingar
+
+6. Övriga egenskaper
+
+    6.1 prestationsförmåga och vasteajat
+    6.2 tillgänglighet, återhämtning, säkerhet, skydd
+    Simulationen är inom öppen källkod. Simulationen ska i slutändan fungera i en internetläsare.    6.3 Upprätthållbarhet
+    6.4 Siirrettävyys ja yhteensopivuus
+    6.5 Operering
+    Spelaren kan inmata eller välja värden till parametrarna. När spelaren är nöjd med sina val kan han/hon
+    trycka på en knapp med texten "simulation". När simulationen är slutförd visas ändringarna åt spelaren i
+    nummer- eller bildformat.
+    6.6 Användbarhet, effektivitet av bruk, användarnöjdhet
+
+7. Planeringsbegränsningar
+
+    7.1 Standarder
+    7.2 Hårdvarobegränsningar 
+    7.3 Mjukvarobegränsningar
+    7.4 Övriga begränsningar
+
+8. Övergivna lösningsalternativ
+
+9. Tankar på fortsat utveckling
+
+English
+1. Introduction
+
+    1.1 Purpouse and kattavuus
+    The intention is to simulate the Finnish national economy from the viewpoint of the
+    financial minister/state. Extension of the simulation is currently limited to two
+    branches.
+    1.2 Producta and environment
+    1.3 Definitions, terms and abbrevations
+    1.4 Viitteet
+    1.5 A general view into the document
+
+2. General descrption
+
+    2.1 Environment
+    2.2 Function
+    2.3 Users
+    2.4 General limitations
+    2.5 Assumptions and dependencies
+
+3. informartion and data base
+
+    3.1 Information content
+
+        3.1 Definitions in each under category
+
+    3.2 User intesity
+    3.3 Capacity requirements
+    3.4 Files and installationfiles
+
+4. Functions
+
+    4.1 Each function in its under category
+
+5. external connections
+
+    5.1 Hardware connections
+    5.2 Software connections
+    5.3 Information traffic connections
+
+6. Other abilities
+
+    6.1 performance ability and vasteajat
+    Time delay from player action is of low concern due to reaction time being unimportant in the game.
+    6.2 availability, recovery, safety, protections
+    The code is open source. The application is to be run in a web browser to maximise availability.
+    6.3 Maintainability
+    The aim is to concentrate on the code so as to keep the most changes in the code.
+    6.4 Transferability and yhteensopivuus
+    The code base is to be transferable as easy as possible to other programming languages.
+    6.5 Operation
+    The player may input values to parameters. When the player is happy with his/her
+    choices he/she can press the button "simulation". When the simulation is complete
+    the changes are shown in text or picture format.
+    6.6 Usability, effeciency of use, user satisfaction
+
+7. Plannning limitations
+
+    7.1 Standards
+    7.2 Hardware limitations
+    7.3 Software limitations
+    7.4 Other limitations
+    The practicant has lacking skills in programming.
+
+8. Abandoned solution alternatives
+
+9. Thoughs of further development

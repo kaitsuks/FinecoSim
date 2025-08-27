@@ -1,18 +1,30 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
-public class PersonFactory : MonoBehaviour
+/// <summary>
+/// Creates many Person objects with randomized attributes.
+/// </summary>
+public static class PersonFactory
 {
-    //this class is to generate agents either by random or from pool
-    //traits of Person-agents
-    string gender = "male";
-    int age = 20;
-    string occupation = "barberer";
-    float WillingnesToConsume = 100;
-    string personality = "calmn"; 
-    //income, at this phase still defined, later to be randomised and dependent of societal factors e.g. employment
-    float tulotaso = 100f;
+    private static System.Random random = new System.Random();
+
+    public static List<Person> CreatePeople(int count)
+    {
+        List<Person> people = new List<Person>();
+
+        string[] genders = { "Male", "Female" };
+        string[] hairStyles = { "Short", "Medium", "Long" };
+
+        for (int i = 0; i < count; i++)
+        {
+            int age = random.Next(18, 66);
+            float money = random.Next(100, 1001);
+            string gender = genders[random.Next(genders.Length)];
+            string hairStyle = hairStyles[random.Next(hairStyles.Length)];
+
+            people.Add(new Person(age, money, gender, hairStyle));
+        }
+
+        return people;
+    }
 }
