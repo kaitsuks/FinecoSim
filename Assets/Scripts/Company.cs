@@ -41,7 +41,6 @@ public class Company : MonoBehaviour
 
         if (totalRevenue >= wages && allPeople.Count > 0)
         {
-            totalRevenue -= wages;
             totalWagesPaid += wages;
 
             float perPerson = wages / allPeople.Count;

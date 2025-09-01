@@ -1,40 +1,78 @@
-﻿// Bring in Unity's core library so we can use MonoBehaviour, LineRenderer, Mathf, etc.
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
+using System.Collections.Generic;
 
-// Define a new component class called GraphPlotter that can be attached to a GameObject in Unity
-public class GraphPlotter : MonoBehaviour
+/// <summary>
+/// Draws a simple graph using LineRenderer
+/// and shows title + legend text with TextMeshPro (set directly in the scene).
+/// Supports adding values either with (x,y) or just y.
+/// </summary>
+[RequireComponent(typeof(LineRenderer))]
+public class Graph : MonoBehaviour
 {
-    // Reference to a LineRenderer component (will be set in the Inspector or added to the same GameObject)
-    public LineRenderer lineRenderer;
+    [Header("Graph Settings")]
+    public int pointCount = 50;     // max number of points to keep
+    public float graphWidth = 10f;  // x-axis width
+    public float graphHeight = 5f;  // y-axis scaling
 
-    // Number of points (vertices) to plot on the graph
-    public int pointCount = 50;
+    [Header("Text Labels (drag in from scene)")]
+    public TextMeshProUGUI titleText;   // text object for the graph title
+    public TextMeshProUGUI legendText;  // text object for the legend/explanation
 
-    // The total width of the graph along the X-axis
-    public float graphWidth = 10f;
+    private LineRenderer lineRenderer;
+    private List<Vector3> points = new List<Vector3>();
+    private int autoX = 0; // automatic x counter if only y-values are added
 
-    // The vertical scaling factor for the graph (multiplies the y-values)
-    public float graphHeight = 5f;
-
-    // Unity automatically calls Start() once at the beginning when the script is first run
     void Start()
     {
-        // Tell the LineRenderer how many points (positions) it will draw
-        lineRenderer.positionCount = pointCount;
+        // Get LineRenderer from the same GameObject
+        lineRenderer = GetComponent<LineRenderer>();
 
-        // Loop through each point index from 0 up to (pointCount - 1)
-        for (int i = 0; i < pointCount; i++)
+        // Optional default texts
+        if (titleText != null)
+            titleText.text = "Government Net Budget";
+
+        if (legendText != null)
+            legendText.text = "y over time";
+    }
+
+    /// <summary>
+    /// Add a new point with explicit x and y.
+    /// </summary>
+    public void AddValue(float x, float y)
+    {
+        if (points.Count >= pointCount)
+            points.RemoveAt(0);
+
+        points.Add(new Vector3(x, y, 0));
+        UpdateGraph();
+    }
+
+    /// <summary>
+    /// Add a new point with only y.
+    /// X is automatically increased by 1 for each call.
+    /// </summary>
+    public void AddValue(float y)
+    {
+        AddValue(autoX, y);
+        autoX++;
+    }
+
+    /// <summary>
+    /// Redraws the graph in the LineRenderer.
+    /// </summary>
+    private void UpdateGraph()
+    {
+        lineRenderer.positionCount = points.Count;
+
+        for (int i = 0; i < points.Count; i++)
         {
-            // Calculate the normalized X position: from 0 → graphWidth
-            // i / (pointCount - 1) gives a fraction (0.0 to 1.0), then multiply by graphWidth
-            float x = (i / (float)(pointCount - 1)) * graphWidth;
+            // Normalize x and y to fit graphWidth and graphHeight
+            float normX = (i / (float)(pointCount - 1)) * graphWidth;
+            float normY = Mathf.Clamp(points[i].y, -graphHeight, graphHeight);
 
-            // Calculate the Y position using the sine function, scaled by graphHeight
-            // This creates the up-and-down wave shape
-            float y = Mathf.Sin(x) * graphHeight; // example function
-
-            // Set the i-th point of the LineRenderer at (x, y, z=0)
-            lineRenderer.SetPosition(i, new Vector3(x, y, 0));
+            lineRenderer.SetPosition(i, new Vector3(normX, normY, 0));
         }
     }
 }
+
