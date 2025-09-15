@@ -20,7 +20,10 @@ public class SimulationController : MonoBehaviour
             timer = 0f;
             t += 0.1f;
 
-            float budget = Mathf.Sin(t);
+            //test if graph works
+            float budget = t;
+            //the real line is below
+            //float budget = Mathf.Sin(t);
 
             // Add only the y-value to the graph
             if (graph != null)
