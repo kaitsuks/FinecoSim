@@ -27,7 +27,6 @@ public class State : MonoBehaviour
     // Economy tracking
     public float totalTaxesCollected = 0f;
     public float totalBenefitsPaid = 0f;
-
     public void CollectTax(float amount)
     {
         totalTaxesCollected += amount;

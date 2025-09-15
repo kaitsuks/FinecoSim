@@ -1,57 +1,33 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Runs the actual simulation loop in Unity.
-/// Attach this script to an empty GameObject.
-/// </summary>
 public class SimulationController : MonoBehaviour
 {
-    public int populationSize = 100;
-    public State government;
-    public Company hairdresserCompany;
+    [Header("References")]
+    public Graph graph;   // drag your Graph object here in the Inspector
 
-    private List<Person> people;
+    [Header("Simulation Settings")]
+    public float updateInterval = 0.5f; // seconds between updates
+    private float timer = 0f;
 
-    void Start()
+    private float t = 0f; // "time" counter for simulation
+
+    void Update()
     {
-        // Create population
-        people = PersonFactory.CreatePeople(populationSize);
+        timer += Time.deltaTime;
 
-        // Link government to companies
-        hairdresserCompany.government = government;
-
-        // Run 10 weeks of simulation
-        for (int week = 1; week <= 10; week++)
+        if (timer >= updateInterval)
         {
-            SimulateWeek(week);
-        }
+            timer = 0f;
+            t += 0.1f;
 
-        Debug.Log("Simulation finished.");
-        Debug.Log($"Government net budget: {government.GetNetBudget()}");
-    }
+            //test if graph works
+            float budget = t;
+            //the real line is below
+            //float budget = Mathf.Sin(t);
 
-    private void SimulateWeek(int week)
-    {
-        Debug.Log($"--- Week {week} ---");
-
-        foreach (var person in people)
-        {
-            person.UpdateWeekly();
-
-            if (person.WantsHaircut())
-            {
-                hairdresserCompany.ServeCustomer(person, government.vatHairdresser);
-                person.GetHaircut();
-                Debug.Log($"{person.Gender} aged {person.Age} got a haircut. Money left: {person.Money}");
-            }
-        }
-
-        // Once a month, pay wages
-        if (week % 4 == 0)
-        {
-            hairdresserCompany.PayWages(people);
-            Debug.Log("Wages paid to citizens.");
+            // Add only the y-value to the graph
+            if (graph != null)
+                graph.AddValue(budget);
         }
     }
 }
