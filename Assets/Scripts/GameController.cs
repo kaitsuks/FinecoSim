@@ -1,39 +1,58 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public Graph graph;                        // Dra in ditt Graph-objekt
-    public SimulationController simulation;    // Dra in ditt SimulationController
-    public TextMeshProUGUI startMenuText;      // Dra in en TMP-text i Canvas som visar instruktioner
+    [Header("UI Panels")]
+    public GameObject startMenuPanel;
+    public GameObject simulationButtonPanel;
+    public GameObject graphPanel;
 
-    private bool gameStarted = false;
+    [Header("References")]
+    public Button simulationButton; // the button in SimulationButtonPanel
+
+    private bool startMenuPassed = false;
+    private bool simulationStarted = false;
 
     void Start()
     {
-        // Stoppa simuleringen och göm grafen från början
-        simulation.enabled = false;
-        graph.gameObject.SetActive(false);
-        startMenuText.gameObject.SetActive(true);
+        // Show only the StartMenu in the beginning
+        startMenuPanel.SetActive(true);
+        simulationButtonPanel.SetActive(false);
+        graphPanel.SetActive(false);
+
+        // Connecting the function of the button
+        simulationButton.onClick.AddListener(StartSimulation);
     }
 
     void Update()
     {
-        if (!gameStarted && Input.GetKeyDown(KeyCode.Return)) // Enter = börja
+        if (!startMenuPassed)
         {
-            gameStarted = true;
-            simulation.enabled = true;
-            graph.gameObject.SetActive(true);
-            startMenuText.gameObject.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.Return)) // Enter
+            {
+                startMenuPassed = true;
+                startMenuPanel.SetActive(false);
+                simulationButtonPanel.SetActive(true); // show the button
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape)) // Esc = avsluta
+        else if (simulationStarted)
         {
-            Application.Quit();
-
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false; // Avsluta i Unity Editor
-#endif
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
         }
+    }
+
+    private void StartSimulation()
+    {
+        simulationStarted = true;
+        simulationButtonPanel.SetActive(false);
+        graphPanel.SetActive(true); // Showing the graph + text
     }
 }

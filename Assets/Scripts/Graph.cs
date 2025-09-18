@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Graph : MonoBehaviour
 {
+    [Header("Text Labels")]
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI legendText;
+
     [Header("Graph Settings")]
     public int pointCount = 50;        // number of points visible at once
     public float graphWidth = 10f;     // width of the graph in local units
@@ -16,11 +21,17 @@ public class Graph : MonoBehaviour
 
     void Start()
     {
+        if (titleText != null)
+            titleText.text = "Government Net Budget";
+
+        if (legendText != null)
+            legendText.text = "y over time";
+
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startColor = Color.green;
-        lineRenderer.endColor = Color.green;
-        lineRenderer.widthMultiplier = 0.1f;
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.red;
+        lineRenderer.widthMultiplier = 0.15f;
 
         // Use local space so the graph follows the GameObject
         lineRenderer.useWorldSpace = false;
@@ -41,7 +52,6 @@ public class Graph : MonoBehaviour
 
     /// <summary>
     /// Updates the LineRenderer positions.
-    /// Smoothly scrolls the graph and scales Y-axis for negative/positive values.
     /// </summary>
     private void UpdateGraph()
     {
@@ -57,9 +67,11 @@ public class Graph : MonoBehaviour
             // Y: scale and offset
             float normY = values[i] * graphHeight + yOffset;
 
+            // Debug-utskrift – syns i Unity Console när spelet körs
+            Debug.Log($"Point {i}: ({normX}, {normY})");
+
             // Use local positions now
             lineRenderer.SetPosition(i, new Vector3(normX, normY, 0f));
         }
     }
 }
-
