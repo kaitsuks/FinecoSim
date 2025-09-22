@@ -31,10 +31,11 @@ public class Graph : MonoBehaviour
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.startColor = Color.red;
         lineRenderer.endColor = Color.red;
-        lineRenderer.widthMultiplier = 0.15f;
+        lineRenderer.widthMultiplier = 0.5f;
+        lineRenderer.useWorldSpace = false; // Use of local space so that the graph follows the GameObject
 
-        // Use local space so the graph follows the GameObject
-        lineRenderer.useWorldSpace = false;
+        //check if the graph is started to been drawn
+        Debug.Log("The graph has started to be drawn");
     }
 
     /// <summary>
@@ -47,6 +48,9 @@ public class Graph : MonoBehaviour
 
         values.Add(y);
         totalPointsAdded++;
+
+        //Check #2 for graph
+        Debug.Log($"Graph.AddValue() – new value {y}, totalPointsAdded={totalPointsAdded}");
         UpdateGraph();
     }
 

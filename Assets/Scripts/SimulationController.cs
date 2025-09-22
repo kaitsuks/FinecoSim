@@ -30,7 +30,10 @@ public class SimulationController : MonoBehaviour
             // float budget = Mathf.Sin(t);
 
             if (graph != null)
+            {
                 graph.AddValue(budget);
+                Debug.Log($"SimulationController sends the value {budget} to the graph");
+            }
         }
     }
 
