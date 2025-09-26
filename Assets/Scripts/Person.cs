@@ -1,10 +1,4 @@
-using UnityEngine;
-
-/// <summary>
-/// Represents one citizen in the economy.
-/// Tracks money, age, gender, and haircut needs.
-/// </summary>
-public class Person
+﻿public class Person
 {
     public int Age { get; private set; }
     public float Money { get; set; }
@@ -12,29 +6,30 @@ public class Person
     public string HairStyle { get; private set; }
     public int WeeksSinceHaircut { get; private set; }
 
-    // Constructor
-    public Person(int age, float money, string gender, string hairStyle)
+    public float Vanity { get; private set; } // 0.0 - 1.0
+
+    public Person(int age, float money, string gender, string hairStyle, float vanity)
     {
         Age = age;
         Money = money;
         Gender = gender;
         HairStyle = hairStyle;
         WeeksSinceHaircut = 0;
+        Vanity = vanity;
     }
 
-    // Called every simulated week
     public void UpdateWeekly()
     {
         WeeksSinceHaircut++;
     }
 
-    // Decide if this person wants a haircut
-    public bool WantsHaircut()
+    public bool WantsHaircut(float haircutPrice)
     {
-        return WeeksSinceHaircut >= 8;
+        // ex: mer fåfänga → kortare max väntetid
+        int maxWeeks = Mathf.RoundToInt(12 - Vanity * 8); // mellan 4–12 veckor
+        return WeeksSinceHaircut >= maxWeeks && Money >= haircutPrice;
     }
 
-    // Reset haircut timer
     public void GetHaircut()
     {
         WeeksSinceHaircut = 0;

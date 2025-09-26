@@ -10,10 +10,13 @@ public class Graph : MonoBehaviour
     public TextMeshProUGUI legendText;
 
     [Header("Graph Settings")]
-    public int pointCount = 50;        // number of points visible at once
-    public float graphWidth = 10f;     // width of the graph in local units
-    public float graphHeight = 5f;     // height of the graph in local units
-    public float yOffset = 0f;         // vertical offset (optional)
+    public int pointCount = 50;
+    public float graphWidth = 10f;
+    public float graphHeight = 5f;
+    public float yOffset = 0f;
+
+    [Header("Anchor")]
+    public Transform anchorPoint; // <- Din nollpunkt i scenen
 
     private LineRenderer lineRenderer;
     private List<float> values = new List<float>();
@@ -31,16 +34,12 @@ public class Graph : MonoBehaviour
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.startColor = Color.red;
         lineRenderer.endColor = Color.red;
-        lineRenderer.widthMultiplier = 0.5f;
-        lineRenderer.useWorldSpace = false; // Use of local space so that the graph follows the GameObject
+        lineRenderer.widthMultiplier = 0.1f;
+        lineRenderer.useWorldSpace = true; // OBS: nu världsrums-koordinater
 
-        //check if the graph is started to been drawn
         Debug.Log("The graph has started to be drawn");
     }
 
-    /// <summary>
-    /// Add a new Y-value to the graph.
-    /// </summary>
     public void AddValue(float y)
     {
         if (values.Count >= pointCount)
@@ -49,33 +48,32 @@ public class Graph : MonoBehaviour
         values.Add(y);
         totalPointsAdded++;
 
-        //Check #2 for graph
         Debug.Log($"Graph.AddValue() – new value {y}, totalPointsAdded={totalPointsAdded}");
         UpdateGraph();
     }
 
-    /// <summary>
-    /// Updates the LineRenderer positions.
-    /// </summary>
     private void UpdateGraph()
     {
+        if (anchorPoint == null)
+        {
+            Debug.LogWarning("No anchor point set for Graph!");
+            return;
+        }
+
         lineRenderer.positionCount = values.Count;
 
         int startIndex = Mathf.Max(0, totalPointsAdded - pointCount);
 
         for (int i = 0; i < values.Count; i++)
         {
-            // X: scale to fit graphWidth
             float normX = ((startIndex + i) / (float)pointCount) * graphWidth;
-
-            // Y: scale and offset
             float normY = values[i] * graphHeight + yOffset;
 
-            // Debug-utskrift – syns i Unity Console när spelet körs
-            Debug.Log($"Point {i}: ({normX}, {normY})");
+            // Punkterna placeras relativt anchorPoint
+            Vector3 pos = anchorPoint.position + new Vector3(normX, normY, 0f);
 
-            // Use local positions now
-            lineRenderer.SetPosition(i, new Vector3(normX, normY, 0f));
+            Debug.Log($"Point {i}: {pos}");
+            lineRenderer.SetPosition(i, pos);
         }
     }
 }

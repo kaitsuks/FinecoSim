@@ -1,51 +1,29 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-/// <summary>
-/// Base class for all companies.
-/// Handles revenue, wages, and tax collection.
-/// </summary>
-public class Company : MonoBehaviour
+﻿public class Hairdresser : Company
 {
-    public string companyName = "Hairdresser";
-    public float basePrice = 20f;
-    public int employees = 1;
-    public float wagesPerEmployee = 2000f;
+    public int capacityPerWeek = 100; // hur många kunder en frisör hinner
+    private int servedThisWeek = 0;
 
-    public float totalRevenue = 0f;
-    public float totalWagesPaid = 0f;
-    public float totalTaxesPaid = 0f;
-
-    public State government;
-
-    // Sell a service (like haircut) to a customer
-    public virtual void ServeCustomer(Person customer, float vatRate)
+    public override void ServeCustomer(Person customer, float vatRate)
     {
-        float price = basePrice * (1f + vatRate);
+        if (servedThisWeek >= capacityPerWeek) return; // fullbokat
 
-        if (customer.Money >= price)
+        float price = basePrice * (1f + vatRate);
+        if (customer.WantsHaircut(price))
         {
             customer.Money -= price;
+            customer.GetHaircut();
             totalRevenue += price;
 
             float vatAmount = basePrice * vatRate;
             government.CollectTax(vatAmount);
             totalTaxesPaid += vatAmount;
+
+            servedThisWeek++;
         }
     }
 
-    // Pay monthly wages to employees (simplified: evenly to all citizens)
-    public virtual void PayWages(List<Person> allPeople)
+    public void ResetWeek()
     {
-        float wages = employees * wagesPerEmployee;
-
-        if (totalRevenue >= wages && allPeople.Count > 0)
-        {
-            totalWagesPaid += wages;
-
-            float perPerson = wages / allPeople.Count;
-            foreach (var p in allPeople)
-                p.Money += perPerson;
-        }
+        servedThisWeek = 0;
     }
 }
