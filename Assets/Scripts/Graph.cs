@@ -8,19 +8,19 @@ public class Graph : MonoBehaviour
     [Header("Text Labels")]
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI legendText;
+    public RectTransform labelContainer;   // an empty game object under the Canvas for eticets
+    public TextMeshProUGUI labelPrefab;    // prefabricated object for X-eticets
 
     [Header("Graph Settings")]
-    public int pointCount = 50;
-    public float graphWidth = 10f;
-    public float graphHeight = 5f;
+    public int pointCount = 50;        // max number visible points at one time
+    public float graphWidth = 500f;    // in UI-pixels
+    public float graphHeight = 200f;   // in UI-pixels
     public float yOffset = 0f;
-
-    [Header("Anchor")]
-    public Transform anchorPoint; // <- Din nollpunkt i scenen
 
     private LineRenderer lineRenderer;
     private List<float> values = new List<float>();
     private int totalPointsAdded = 0;
+    private List<TextMeshProUGUI> xLabels = new List<TextMeshProUGUI>();
 
     void Start()
     {
@@ -34,10 +34,16 @@ public class Graph : MonoBehaviour
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.startColor = Color.red;
         lineRenderer.endColor = Color.red;
-        lineRenderer.widthMultiplier = 0.1f;
-        lineRenderer.useWorldSpace = true; // OBS: nu världsrums-koordinater
+        lineRenderer.widthMultiplier = 2f;
+        lineRenderer.useWorldSpace = false;
 
-        Debug.Log("The graph has started to be drawn");
+        // creating eticts for the x-axis
+        for (int i = 0; i < pointCount; i++)
+        {
+            TextMeshProUGUI lbl = Instantiate(labelPrefab, labelContainer);
+            lbl.text = "";
+            xLabels.Add(lbl);
+        }
     }
 
     public void AddValue(float y)
@@ -48,32 +54,37 @@ public class Graph : MonoBehaviour
         values.Add(y);
         totalPointsAdded++;
 
-        Debug.Log($"Graph.AddValue() – new value {y}, totalPointsAdded={totalPointsAdded}");
         UpdateGraph();
     }
 
     private void UpdateGraph()
     {
-        if (anchorPoint == null)
-        {
-            Debug.LogWarning("No anchor point set for Graph!");
+        if (values.Count == 0)
             return;
-        }
+
+        // counting the average value
+        float sum = 0f;
+        foreach (float v in values) sum += v;
+        float avg = sum / values.Count;
 
         lineRenderer.positionCount = values.Count;
 
-        int startIndex = Mathf.Max(0, totalPointsAdded - pointCount);
-
         for (int i = 0; i < values.Count; i++)
         {
-            float normX = ((startIndex + i) / (float)pointCount) * graphWidth;
-            float normY = values[i] * graphHeight + yOffset;
+            // X-coordinat (pixels → normalised length in World Space)
+            float normX = (i / (float)(pointCount - 1)) * graphWidth;
+            float normY = ((values[i] - avg) / graphHeight) * graphHeight + yOffset;
 
-            // Punkterna placeras relativt anchorPoint
-            Vector3 pos = anchorPoint.position + new Vector3(normX, normY, 0f);
-
-            Debug.Log($"Point {i}: {pos}");
+            Vector3 pos = new Vector3(normX, normY, 0f);
             lineRenderer.SetPosition(i, pos);
+
+            // updating x-etikets position and text
+            if (i < xLabels.Count)
+            {
+                xLabels[i].rectTransform.anchoredPosition = new Vector2(normX, -20f); // -20 under the graph
+                int weekNumber = totalPointsAdded - values.Count + i + 1;
+                xLabels[i].text = "v." + weekNumber;
+            }
         }
     }
 }
