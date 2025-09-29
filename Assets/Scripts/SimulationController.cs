@@ -1,61 +1,47 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SimulationController : MonoBehaviour
 {
     [Header("References")]
-    public Graph graph;
-    public State government;
-    public List<Hairdresser> hairdressers = new List<Hairdresser>();
-    public List<Person> people = new List<Person>();
+    public Graph graph;   // dra in din Graph i Inspectorn
 
-    [Header("Settings")]
-    public float updateInterval = 1f; // en vecka per "tick"
+    [Header("Simulation Settings")]
+    public float updateInterval = 0.5f; // sekunder mellan uppdateringar
 
     private float timer = 0f;
+    private float t = 0f; // "tid" för simuleringen
     private bool simulationRunning = false;
-    private int week = 0;
 
     void Update()
     {
-        if (!simulationRunning) return;
+        if (!simulationRunning) return; // gör ingenting förrän simulationen har startat
 
         timer += Time.deltaTime;
+
         if (timer >= updateInterval)
         {
             timer = 0f;
-            RunWeek();
-        }
-    }
+            t += 0.1f;
 
-    void RunWeek()
-    {
-        week++;
-        foreach (var p in people) p.UpdateWeekly();
-        foreach (var h in hairdressers) h.ResetWeek();
+            // Exempel: linjär ökning
+            float budget = t;
 
-        // försök ge alla personer frisörtjänst
-        foreach (var p in people)
-        {
-            foreach (var h in hairdressers)
+            // Exempel: sinusvåg istället
+            // float budget = Mathf.Sin(t);
+
+            if (graph != null)
             {
-                h.ServeCustomer(p, government.vatHairdresser);
+                graph.AddValue(budget);
+                Debug.Log($"SimulationController sends the value {budget} to the graph");
             }
         }
-
-        // exempel: rita genomsnittlig hår-längd
-        float avgHair = 0f;
-        foreach (var p in people) avgHair += p.WeeksSinceHaircut;
-        avgHair /= people.Count;
-
-        if (graph != null)
-            graph.AddValue(avgHair);
     }
 
+    // Anropas av GameController när spelaren tryckt på Simulationsknappen
     public void StartSimulation()
     {
         simulationRunning = true;
+        t = 0f;
         timer = 0f;
-        week = 0;
     }
 }
