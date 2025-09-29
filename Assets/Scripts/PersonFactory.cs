@@ -22,7 +22,10 @@ public static class PersonFactory
             string gender = genders[random.Next(genders.Length)];
             string hairStyle = hairStyles[random.Next(hairStyles.Length)];
 
-            people.Add(new Person(age, money, gender, hairStyle));
+            // Slumpad fåfänga mellan 0.0 och 1.0
+            float vanity = (float)random.NextDouble();
+
+            people.Add(new Person(age, money, gender, hairStyle, vanity));
         }
 
         return people;

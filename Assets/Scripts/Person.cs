@@ -1,4 +1,7 @@
-﻿public class Person
+﻿using UnityEngine;
+
+public class Person
+
 {
     public int Age { get; private set; }
     public float Money { get; set; }
