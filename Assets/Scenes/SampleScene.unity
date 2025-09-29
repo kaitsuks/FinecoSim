@@ -975,11 +975,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 8575860791450581198}
   legendText: {fileID: 1123669991}
+  labelContainer: {fileID: 0}
+  labelPrefab: {fileID: 0}
   pointCount: 50
   graphWidth: 10
   graphHeight: 10
   yOffset: 0
-  anchorPoint: {fileID: 1361338961}
 --- !u!120 &1228911430
 LineRenderer:
   serializedVersion: 2
@@ -1200,7 +1201,7 @@ Transform:
   m_GameObject: {fileID: 1361338960}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.25, y: -4.22, z: -0.100351356}
+  m_LocalPosition: {x: -8.475, y: -4.353, z: -0.100351356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
