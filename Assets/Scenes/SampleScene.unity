@@ -975,7 +975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -269.7, y: 48}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1228911428
@@ -1013,8 +1013,6 @@ MonoBehaviour:
   labelContainer: {fileID: 1212676352}
   labelPrefab: {fileID: 4556564619534426109, guid: 77c28ca74014d744489a040c1b158d81, type: 3}
   pointCount: 50
-  graphWidth: 10
-  graphHeight: 10
   yOffset: 0
 --- !u!120 &1228911430
 LineRenderer:
@@ -1384,7 +1382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -710.1, y: 75.79999}
+  m_AnchoredPosition: {x: -642, y: 85}
   m_SizeDelta: {x: 200, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668596553
