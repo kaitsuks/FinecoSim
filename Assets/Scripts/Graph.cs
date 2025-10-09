@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI.Extensions; // viktigt för UI Line Renderer
 
-[RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(UILineRenderer))]
 public class Graph : MonoBehaviour
 {
     [Header("Text Labels")]
@@ -15,7 +16,7 @@ public class Graph : MonoBehaviour
     public int pointCount = 50;
     public float yOffset = 0f;
 
-    private LineRenderer lineRenderer;
+    private UILineRenderer lineRenderer;
     private List<float> values = new List<float>();
     private int totalPointsAdded = 0;
     private List<TextMeshProUGUI> xLabels = new List<TextMeshProUGUI>();
@@ -29,12 +30,13 @@ public class Graph : MonoBehaviour
         if (legendText != null)
             legendText.text = "y over time";
 
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.red;
-        lineRenderer.widthMultiplier = 0.02f; //thickness of line
-        lineRenderer.useWorldSpace = false;
+        // Hämta UI Line Renderer-komponenten
+        lineRenderer = GetComponent<UILineRenderer>();
+
+        // Anpassa standardinställningar (valfritt)
+        lineRenderer.color = Color.red;
+        lineRenderer.LineThickness = 2f; // motsvarar tjocklek i pixelvärlden
+        lineRenderer.LineList = false; // kontinuerlig linje
 
         // Hämta GraphPanel (föräldern)
         graphPanelRect = GetComponentInParent<RectTransform>();
@@ -61,31 +63,37 @@ public class Graph : MonoBehaviour
 
     private void UpdateGraph()
     {
-        if (values.Count == 0) return;
+        if (values.Count == 0 || graphPanelRect == null || lineRenderer == null)
+            return;
 
         float graphWidth = graphPanelRect.rect.width;
         float graphHeight = graphPanelRect.rect.height;
 
-        // Medelvärdet
+        // Beräkna medelvärdet
         float sum = 0f;
         foreach (float v in values) sum += v;
         float avg = sum / values.Count;
 
-        lineRenderer.positionCount = values.Count;
+        // Skapa positionsarray för UI Line Renderer
+        Vector2[] points = new Vector2[values.Count];
 
         for (int i = 0; i < values.Count; i++)
         {
             float normX = (i / (float)(pointCount - 1)) * graphWidth;
             float normY = ((values[i] - avg) / graphHeight) * graphHeight + yOffset;
 
-            Vector3 pos = new Vector3(normX - graphWidth / 2, normY, 0f);
-            lineRenderer.SetPosition(i, pos);
+            points[i] = new Vector2(normX - graphWidth / 2f, normY);
 
             if (i < xLabels.Count)
             {
-                xLabels[i].rectTransform.anchoredPosition = new Vector2(normX - graphWidth / 2, -40f); //the distance to the graph screen
-                xLabels[i].text = (i + 1).ToString(); //what is written
+                xLabels[i].rectTransform.anchoredPosition =
+                    new Vector2(normX - graphWidth / 2f, -40f); // etikettens position
+                xLabels[i].text = (i + 1).ToString();
             }
         }
+
+        // Tilldela punkterna till UI Line Renderer
+        lineRenderer.Points = points;
+        lineRenderer.SetAllDirty(); // uppdatera renderingen
     }
 }
