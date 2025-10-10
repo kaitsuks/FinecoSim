@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.UI.Extensions; // viktigt för UI Line Renderer
+using UnityEngine.UI.Extensions; // required for UI Line Renderer
 
 [RequireComponent(typeof(UILineRenderer))]
 public class Graph : MonoBehaviour
@@ -12,9 +12,16 @@ public class Graph : MonoBehaviour
     public RectTransform labelContainer;
     public TextMeshProUGUI labelPrefab;
 
+    [Header("Label Settings")]
+    public int labelInterval = 2;
+
     [Header("Graph Settings")]
     public int pointCount = 50;
     public float yOffset = 0f;
+
+    [Header("Label Appearance")]
+    public float labelFontSize = 18f;
+    public Vector2 labelSize = new Vector2(40f, 20f);
 
     private UILineRenderer lineRenderer;
     private List<float> values = new List<float>();
@@ -30,22 +37,27 @@ public class Graph : MonoBehaviour
         if (legendText != null)
             legendText.text = "y over time";
 
-        // Hämta UI Line Renderer-komponenten
+        //Retrieving UI Line Renderer-component
         lineRenderer = GetComponent<UILineRenderer>();
 
-        // Anpassa standardinställningar (valfritt)
-        lineRenderer.color = Color.red;
-        lineRenderer.LineThickness = 2f; // motsvarar tjocklek i pixelvärlden
-        lineRenderer.LineList = false; // kontinuerlig linje
+        //settings
+        lineRenderer.color = Color.red; //colour of line
+        lineRenderer.LineThickness = 2f; //thicknes i millimetres
+        lineRenderer.LineList = false; //continuous line
 
-        // Hämta GraphPanel (föräldern)
+        //Retrieving GraphPanel (parent)
         graphPanelRect = GetComponentInParent<RectTransform>();
 
-        // Skapa etiketter
+        //Creating etikets
         for (int i = 0; i < pointCount; i++)
         {
             TextMeshProUGUI lbl = Instantiate(labelPrefab, labelContainer);
             lbl.text = "";
+
+            RectTransform rt = lbl.GetComponent<RectTransform>();
+            rt.sizeDelta = labelSize; // Bringing from Inspector
+            lbl.fontSize = labelFontSize; // Bringing from Inspector
+
             xLabels.Add(lbl);
         }
     }
@@ -69,12 +81,12 @@ public class Graph : MonoBehaviour
         float graphWidth = graphPanelRect.rect.width;
         float graphHeight = graphPanelRect.rect.height;
 
-        // Beräkna medelvärdet
+        // Counting average value
         float sum = 0f;
         foreach (float v in values) sum += v;
         float avg = sum / values.Count;
 
-        // Skapa positionsarray för UI Line Renderer
+        // Creating positionsarray for UI Line Renderer
         Vector2[] points = new Vector2[values.Count];
 
         for (int i = 0; i < values.Count; i++)
@@ -86,14 +98,17 @@ public class Graph : MonoBehaviour
 
             if (i < xLabels.Count)
             {
-                xLabels[i].rectTransform.anchoredPosition =
-                    new Vector2(normX - graphWidth / 2f, -40f); // etikettens position
-                xLabels[i].text = (i + 1).ToString();
+                xLabels[i].rectTransform.anchoredPosition = new Vector2(normX - graphWidth / 2f, -40f);
+
+                if (i % labelInterval == 0)
+                    xLabels[i].text = $"{i}";
+                else
+                    xLabels[i].text = "";
             }
         }
 
-        // Tilldela punkterna till UI Line Renderer
+        // Adding points to UI Line Renderer
         lineRenderer.Points = points;
-        lineRenderer.SetAllDirty(); // uppdatera renderingen
+        lineRenderer.SetAllDirty(); // update to renderingen
     }
 }
