@@ -41,7 +41,7 @@ public class Graph : MonoBehaviour
         lineRenderer = GetComponent<UILineRenderer>();
 
         //settings
-        lineRenderer.color = Color.red; //colour of line
+        lineRenderer.color = Color.red; // colour of line
         lineRenderer.LineThickness = 2f; //thicknes i millimetres
         lineRenderer.LineList = false; //continuous line
 
@@ -65,7 +65,12 @@ public class Graph : MonoBehaviour
     public void AddValue(float y)
     {
         if (values.Count >= pointCount)
+        {
+            // removal of two points instead of one
             values.RemoveAt(0);
+            if (values.Count >= pointCount)
+                values.RemoveAt(0);
+        }
 
         values.Add(y);
         totalPointsAdded++;
@@ -81,13 +86,15 @@ public class Graph : MonoBehaviour
         float graphWidth = graphPanelRect.rect.width;
         float graphHeight = graphPanelRect.rect.height;
 
-        // Counting average value
+        // counting the average value
         float sum = 0f;
         foreach (float v in values) sum += v;
         float avg = sum / values.Count;
 
-        // Creating positionsarray for UI Line Renderer
         Vector2[] points = new Vector2[values.Count];
+
+        // counting the startindex in "global" coordinates
+        int firstVisibleIndex = totalPointsAdded - values.Count;
 
         for (int i = 0; i < values.Count; i++)
         {
@@ -100,15 +107,17 @@ public class Graph : MonoBehaviour
             {
                 xLabels[i].rectTransform.anchoredPosition = new Vector2(normX - graphWidth / 2f, -40f);
 
-                if (i % labelInterval == 0)
-                    xLabels[i].text = $"{i}";
+                int globalIndex = totalPointsAdded - values.Count + i;
+
+                // only every second (or according to laberInterval) is shown
+                if (globalIndex % labelInterval == 0)
+                    xLabels[i].text = $"{globalIndex}";
                 else
                     xLabels[i].text = "";
             }
         }
 
-        // Adding points to UI Line Renderer
         lineRenderer.Points = points;
-        lineRenderer.SetAllDirty(); // update to renderingen
+        lineRenderer.SetAllDirty();
     }
 }
