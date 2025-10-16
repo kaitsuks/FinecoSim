@@ -3,18 +3,37 @@ using UnityEngine;
 public class SimulationController : MonoBehaviour
 {
     [Header("References")]
-    public Graph graph;   // dra in din Graph i Inspectorn
+    public Graph graph;
 
     [Header("Simulation Settings")]
-    public float updateInterval = 0.5f; // sekunder mellan uppdateringar
+    public float updateInterval = 0.5f;
+
+    // new settings
+    private float haircutPrice;
+    private float vatHaircut;
+    private int population;
+    private int hairdressers;
+    private int customersPerHairdresser;
 
     private float timer = 0f;
-    private float t = 0f; // "tid" för simuleringen
+    private float t = 0f;
     private bool simulationRunning = false;
+
+    public void InitializeSimulation(float price, float vat, int pop, int hair, int customersPer, float interval)
+    {
+        haircutPrice = price;
+        vatHaircut = vat;
+        population = pop;
+        hairdressers = hair;
+        customersPerHairdresser = customersPer;
+        updateInterval = interval;
+
+        Debug.Log($"Simulation initialized: price={price}, vat={vat}, pop={pop}, hair={hair}, cust/hair={customersPer}, interval={interval}");
+    }
 
     void Update()
     {
-        if (!simulationRunning) return; // gör ingenting förrän simulationen har startat
+        if (!simulationRunning) return;
 
         timer += Time.deltaTime;
 
@@ -23,21 +42,13 @@ public class SimulationController : MonoBehaviour
             timer = 0f;
             t += 0.1f;
 
-            // Exempel: linjär ökning
-            float budget = t;
-
-            // Exempel: sinusvåg istället
-            // float budget = Mathf.Sin(t);
-
+            // the logic of the code is written here
+            float budget = Mathf.Sin(t) * 10f + 50f;
             if (graph != null)
-            {
                 graph.AddValue(budget);
-                Debug.Log($"SimulationController sends the value {budget} to the graph");
-            }
         }
     }
 
-    // Anropas av GameController när spelaren tryckt på Simulationsknappen
     public void StartSimulation()
     {
         simulationRunning = true;
