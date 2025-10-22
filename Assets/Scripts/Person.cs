@@ -29,7 +29,7 @@ public class Person
     public bool WantsHaircut(float haircutPrice)
     {
         // ex: mer fåfänga → kortare max väntetid
-        int maxWeeks = Mathf.RoundToInt(12 - Vanity * 8); // mellan 4–12 veckor
+        int maxWeeks = Mathf.RoundToInt(12 - Vanity * 8); // between 4 to 12 weeks
         return WeeksSinceHaircut >= maxWeeks && Money >= haircutPrice;
     }
 

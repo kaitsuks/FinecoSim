@@ -84,15 +84,18 @@ public class Graph : MonoBehaviour
 
     public void AddValue(float y)
     {
+        // Ta bort gamla värden om vi är över maxantal
         while (values.Count >= pointCount)
         {
             for (int i = 0; i < scrollStep && values.Count > 0; i++)
                 values.RemoveAt(0);
         }
 
+        // Lägg till nytt värde
         values.Add(y);
         totalPointsAdded++;
 
+        // Rita om grafen
         UpdateGraph();
     }
 
@@ -104,20 +107,34 @@ public class Graph : MonoBehaviour
         float graphWidth = graphPanelRect.rect.width;
         float graphHeight = graphPanelRect.rect.height;
 
-        // counting average value
+        // counting the average value
         float sum = 0f;
         foreach (float v in values) sum += v;
         float avg = sum / values.Count;
 
-        // drawing the main graph
+        // finding minimmal and maximum values for scaling of graph
+        float minVal = Mathf.Min(values.ToArray());
+        float maxVal = Mathf.Max(values.ToArray());
+        float range = Mathf.Max(1f, maxVal - minVal);
+
+        // building points for the line
         Vector2[] points = new Vector2[values.Count];
         for (int i = 0; i < values.Count; i++)
         {
+            // X: propotionally along the width of the graph
             float normX = (i / (float)(pointCount - 1)) * graphWidth;
-            float normY = ((values[i] - avg) / graphHeight) * graphHeight + yOffset;
+
+            // Y: in relation to the average value (0 = middle)
+            float relativeY = (values[i] - avg) / range; // in between -0.5 and 0.5 roughly
+            float normY = relativeY * (graphHeight / 2f); // middle = 0
+
+            // the first point, always start in the middle (0,0)
+            if (i == 0)
+                normY = 0;
 
             points[i] = new Vector2(normX - graphWidth / 2f, normY);
 
+            // labels under the graph
             if (i < xLabels.Count)
             {
                 xLabels[i].rectTransform.anchoredPosition = new Vector2(normX - graphWidth / 2f, -40f);
@@ -125,21 +142,22 @@ public class Graph : MonoBehaviour
             }
         }
 
+        // updating the line
         lineRenderer.Points = points;
         lineRenderer.SetAllDirty();
 
-        // drawing the middle line always in the middle of the graph
+        // drawing the line in the middle
         Vector2[] avgPoints = new Vector2[2];
-        avgPoints[0] = new Vector2(-graphWidth / 2f, 0); // 0 = mitten
+        avgPoints[0] = new Vector2(-graphWidth / 2f, 0);
         avgPoints[1] = new Vector2(graphWidth / 2f, 0);
         avgLineRenderer.Points = avgPoints;
         avgLineRenderer.SetAllDirty();
 
-        // Updating the etiket every second time
+        // Showing average value to left of (0, middle)
         if (avgLabel != null)
         {
-            avgLabel.text = (totalPointsAdded % 2 == 0) ? $"Avg: {avg:F2}" : avgLabel.text;
-            avgLabel.rectTransform.anchoredPosition = new Vector2(-420, 0f); // the location of the lable
+            avgLabel.text = $"Avg: {avg:F2}";
+            avgLabel.rectTransform.anchoredPosition = new Vector2(-graphWidth / 2f - 60f, 0f);
         }
     }
 }

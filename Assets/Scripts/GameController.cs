@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void StartSimulation()
+    public void StartSimulation() // this has to be "public" otherwise it cannot be added in "OnClick()"
     {
         Debug.Log("3. The simulation button has been pressed");
         simulationStarted = true;
