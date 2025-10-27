@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 public class Person
-
 {
     public int Age { get; private set; }
     public float Money { get; set; }
@@ -9,16 +8,17 @@ public class Person
     public string HairStyle { get; private set; }
     public int WeeksSinceHaircut { get; private set; }
 
-    public float Vanity { get; private set; } // 0.0 - 1.0
+    private static System.Random random = new System.Random();
 
-    public Person(int age, float money, string gender, string hairStyle, float vanity)
+    public Person(int age, float money, string gender, string hairStyle)
     {
         Age = age;
         Money = money;
         Gender = gender;
         HairStyle = hairStyle;
-        WeeksSinceHaircut = 0;
-        Vanity = vanity;
+
+        // Random number of weeks since the last haircut before the simulation starts
+        WeeksSinceHaircut = random.Next(0, 10);
     }
 
     public void UpdateWeekly()
@@ -26,15 +26,22 @@ public class Person
         WeeksSinceHaircut++;
     }
 
-    public bool WantsHaircut(float haircutPrice)
+    public bool WantsHaircut(float haircutPrice, int haircutInterval)
     {
-        // ex: mer fåfänga → kortare max väntetid
-        int maxWeeks = Mathf.RoundToInt(12 - Vanity * 8); // between 4 to 12 weeks
-        return WeeksSinceHaircut >= maxWeeks && Money >= haircutPrice;
+        // A person wants a haircut if specified number of weeks has passed and money is sufficcent for the hair cut
+        bool wantsHaircut = WeeksSinceHaircut >= haircutInterval && Money >= haircutPrice;
+
+        if (wantsHaircut)
+        {
+            Debug.Log($"{Gender} {Age} wants a haircut (Money: {Money} €, Weeks since last haircut: {WeeksSinceHaircut})");
+        }
+
+        return wantsHaircut;
     }
 
     public void GetHaircut()
     {
+        // Reseting the weeks since the last haircut to 0
         WeeksSinceHaircut = 0;
     }
 }

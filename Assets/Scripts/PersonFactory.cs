@@ -21,11 +21,7 @@ public static class PersonFactory
             float money = random.Next(100, 1001);
             string gender = genders[random.Next(genders.Length)];
             string hairStyle = hairStyles[random.Next(hairStyles.Length)];
-
-            // Slumpad fåfänga mellan 0.0 och 1.0
-            float vanity = (float)random.NextDouble();
-
-            people.Add(new Person(age, money, gender, hairStyle, vanity));
+            people.Add(new Person(age, money, gender, hairStyle));
         }
 
         return people;

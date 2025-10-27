@@ -84,18 +84,17 @@ public class Graph : MonoBehaviour
 
     public void AddValue(float y)
     {
-        // Ta bort gamla värden om vi är över maxantal
-        while (values.Count >= pointCount)
+        // removing old values if above maximal number        while (values.Count >= pointCount)
         {
             for (int i = 0; i < scrollStep && values.Count > 0; i++)
                 values.RemoveAt(0);
         }
 
-        // Lägg till nytt värde
+        // adding a new value
         values.Add(y);
         totalPointsAdded++;
 
-        // Rita om grafen
+        // drawing a graph
         UpdateGraph();
     }
 

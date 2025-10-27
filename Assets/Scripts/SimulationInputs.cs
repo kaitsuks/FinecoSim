@@ -23,7 +23,7 @@ public class SimulationInputs : MonoBehaviour
             return;
         }
 
-        // Läs in och omvandla textvärden
+        // Reading and converting text values
         float price = ParseFloat(priceInput.text, 20f);
         float vat = ParseFloat(vatInput.text, 0.20f);
         int population = ParseInt(populationInput.text, 1000);
@@ -31,7 +31,7 @@ public class SimulationInputs : MonoBehaviour
         int customersPer = ParseInt(customersPerHairdresserInput.text, 50);
         float interval = ParseFloat(intervalInput.text, 0.5f);
 
-        // Skicka värden till SimulationController
+        // Sending values to SimulationController
         simulationController.InitializeSimulation(price, vat, population, hairdressers, customersPer, interval);
     }
 
