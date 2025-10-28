@@ -1,51 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-/// <summary>
-/// Base class for all companies.
-/// Handles revenue, wages, and tax collection.
-/// </summary>
 public class Company : MonoBehaviour
 {
-    public string companyName = "Hairdresser";
-    public float basePrice = 20f;
-    public int employees = 1;
-    public float wagesPerEmployee = 2000f;
+    public string Name { get; set; }
+    public List<Person> Employees { get; set; }
 
-    public float totalRevenue = 0f;
-    public float totalWagesPaid = 0f;
-    public float totalTaxesPaid = 0f;
-
-    public State government;
-
-    // Sell a service (like haircut) to a customer
-    public virtual void ServeCustomer(Person customer, float vatRate)
+    // Metod för att lägga till en anställd
+    public void AddEmployee(Person employee)
     {
-        float price = basePrice * (1f + vatRate);
-
-        if (customer.Money >= price)
-        {
-            customer.Money -= price;
-            totalRevenue += price;
-
-            float vatAmount = basePrice * vatRate;
-            government.CollectTax(vatAmount);
-            totalTaxesPaid += vatAmount;
-        }
+        Employees.Add(employee);
+        employee.WorksAtSalon = true;  // Markera att personen jobbar här
     }
 
-    // Pay monthly wages to employees (simplified: evenly to all citizens)
-    public virtual void PayWages(List<Person> allPeople)
+    public void AddEmployee(Person employee)
     {
-        float wages = employees * wagesPerEmployee;
-
-        if (totalRevenue >= wages && allPeople.Count > 0)
-        {
-            totalWagesPaid += wages;
-
-            float perPerson = wages / allPeople.Count;
-            foreach (var p in allPeople)
-                p.Money += perPerson;
-        }
+        Employees.Add(employee);  // Lägg till personen i listan
+        employee.WorksAtSalon = true;  // Markera att personen jobbar här
     }
 }

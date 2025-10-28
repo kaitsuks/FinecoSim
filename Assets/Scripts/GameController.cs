@@ -17,12 +17,12 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        // Show only the StartMenu at the beginning
+        // Showing only the StartMenu at the beginning
         startMenuPanel.SetActive(true);
         simulationButtonPanel.SetActive(false);
         graphPanel.SetActive(false);
 
-        // Connect the button press to StartSimulation()
+        // Connecting the button press to StartSimulation()
         simulationButton.onClick.AddListener(StartSimulation);
     }
 
@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void StartSimulation() // this has to be "public" otherwise it cannot be added in "OnClick()"
+    public void StartSimulation()
     {
         Debug.Log("3. The simulation button has been pressed");
         simulationStarted = true;
@@ -69,10 +69,10 @@ public class GameController : MonoBehaviour
         simulationButtonPanel.SetActive(false);
         graphPanel.SetActive(true);
 
-        // Starting the simulation logic here
+        // Startar simuleringen här
         if (simulationController != null)
         {
-            simulationController.StartSimulation();
+            simulationController.StartSimulation();  // Anropar den nya metoden
             Debug.Log("5. The simulation has started (SimulationController running)");
         }
         else

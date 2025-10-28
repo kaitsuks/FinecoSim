@@ -12,7 +12,7 @@ public class SimulationInputs : MonoBehaviour
     public TMP_InputField intervalInput;
 
     [Header("References")]
-    public SimulationController simulationController;
+    public SimulationController simulationController; // Referens till SimulationController
 
     // Kallas när användaren trycker på startknappen
     public void ApplyInputs()
@@ -23,7 +23,7 @@ public class SimulationInputs : MonoBehaviour
             return;
         }
 
-        // Reading and converting text values
+        // Läser och konverterar textvärden
         float price = ParseFloat(priceInput.text, 20f);
         float vat = ParseFloat(vatInput.text, 0.20f);
         int population = ParseInt(populationInput.text, 1000);
@@ -31,7 +31,7 @@ public class SimulationInputs : MonoBehaviour
         int customersPer = ParseInt(customersPerHairdresserInput.text, 50);
         float interval = ParseFloat(intervalInput.text, 0.5f);
 
-        // Sending values to SimulationController
+        // Skickar värdena till SimulationController
         simulationController.InitializeSimulation(price, vat, population, hairdressers, customersPer, interval);
     }
 

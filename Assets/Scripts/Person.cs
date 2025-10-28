@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Person
+public class Person : MonoBehaviour
 {
-    public int Age { get; private set; }
+    // Lägg till egenskaper som tidigare
     public float Money { get; set; }
-    public string Gender { get; private set; }
-    public string HairStyle { get; private set; }
-    public int WeeksSinceHaircut { get; private set; }
-
-    private static System.Random random = new System.Random();
+    public int Age { get; set; }
+    public string Gender { get; set; }
+    public string HairStyle { get; set; }
+    public bool WorksAtSalon { get; set; } // Flagga som visar om personen arbetar på salongen
 
     public Person(int age, float money, string gender, string hairStyle)
     {
@@ -16,32 +17,18 @@ public class Person
         Money = money;
         Gender = gender;
         HairStyle = hairStyle;
-
-        // Random number of weeks since the last haircut before the simulation starts
-        WeeksSinceHaircut = random.Next(0, 10);
+        WorksAtSalon = false;  // Standardvärde: personen arbetar inte på salongen från början
     }
 
-    public void UpdateWeekly()
+    // Metod för att ge lön till personer som inte arbetar på salong
+    public void ReceiveSalary()
     {
-        WeeksSinceHaircut++;
-    }
-
-    public bool WantsHaircut(float haircutPrice, int haircutInterval)
-    {
-        // A person wants a haircut if specified number of weeks has passed and money is sufficcent for the hair cut
-        bool wantsHaircut = WeeksSinceHaircut >= haircutInterval && Money >= haircutPrice;
-
-        if (wantsHaircut)
+        // Om personen inte arbetar på salongen, ge dem en slumpmässig lön
+        if (!WorksAtSalon)
         {
-            Debug.Log($"{Gender} {Age} wants a haircut (Money: {Money} €, Weeks since last haircut: {WeeksSinceHaircut})");
+            float salary = Random.Range(1800f, 3000f);  // Slumpmässig lön mellan 1800 och 3000 euro
+            Money += salary;
+            Debug.Log($"{Gender} {Age} received a salary of {salary:F2} € (Total money: {Money:F2} €)");
         }
-
-        return wantsHaircut;
-    }
-
-    public void GetHaircut()
-    {
-        // Reseting the weeks since the last haircut to 0
-        WeeksSinceHaircut = 0;
     }
 }

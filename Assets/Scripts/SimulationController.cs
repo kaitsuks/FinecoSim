@@ -1,173 +1,91 @@
-﻿    using UnityEngine;
-    using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-    public class SimulationController : MonoBehaviour
+public class SimulationController : MonoBehaviour
+{
+    public List<Person> people; // Lista över alla personer
+    public List<Company> salons; // Lista över alla salonger
+
+    // De nya variablerna för att lagra de inputvärden som kommer från SimulationInputs
+    private float price;
+    private float vat;
+    private int population;
+    private int hairdressers;
+    private int customersPer;
+    private float interval;
+
+    // Starta spelet och fördela anställda på salongerna
+    void Start()
     {
-        [Header("References")]
-        public Graph graph;
+        // Tilldela anställda till salongerna
+        AssignEmployeesToSalons();
 
-        [Header("Simulation Settings")]
-        public float updateInterval = 0.5f;
+        // Simulera veckan när spelet startar
+        SimulateWeek();
+    }
 
-        // Input values
-        private float haircutPrice;
-        private float vatHaircut;
-        private int population;
-        private int hairdressers;
-        private int customersPerHairdresser;
-
-        // Internal data
-        private List<Person> people;
-        private State state;
-        private List<Company> salons;
-
-        private float timer = 0f;
-        private int currentWeek = 0;
-        private bool simulationRunning = false;
-
-        public void InitializeSimulation(float price, float vat, int pop, int hair, int customersPer, float interval)
-        {
-            haircutPrice = price;
-            vatHaircut = vat;
-            population = pop;
-            hairdressers = hair;
-            customersPerHairdresser = customersPer;
-            updateInterval = interval;
-
-            Debug.Log($"✅ Simulation initialized:\n" +
-                      $"Haircut price: {price} €\n" +
-                      $"VAT: {vat * 100f}%\n" +
-                      $"Population: {pop}\n" +
-                      $"Hairdressers: {hair}\n" +
-                      $"Customers per hairdresser per day: {customersPer}\n" +
-                      $"Time interval (weeks): {interval}");
-
-            // Creating people (agents)
-            people = PersonFactory.CreatePeople(population);
-
-            // Creating the government/state
-            GameObject stateObj = new GameObject("State");
-            state = stateObj.AddComponent<State>();
-
-            // Creating hair salon companies
-            salons = new List<Company>();
-            for (int i = 0; i < hairdressers; i++)
-            {
-                GameObject salonObj = new GameObject($"Salon_{i + 1}");
-                Company c = salonObj.AddComponent<Company>();
-                c.companyName = $"Hairdresser_{i + 1}";
-                c.basePrice = haircutPrice;
-                c.employees = 1;
-                c.government = state;
-                salons.Add(c);
-            }
-
-            Debug.Log($"💇‍♀️ Created {hairdressers} hair salon companies.");
-        }
-
-        void Update()
-        {
-            if (!simulationRunning) return;
-
-            timer += Time.deltaTime;
-
-            if (timer >= updateInterval)
-            {
-                timer = 0f;
-                SimulateWeek();
-            }
-        }
-
-    private void SimulateWeek()
+    public void StartSimulation()
     {
-        currentWeek++;
-        int totalHaircuts = 0;
-        float totalRevenue = 0f;
-        float totalVAT = 0f;
+        // Här kan du kalla på Start() om du vill att Start-logiken ska köras också
+        AssignEmployeesToSalons(); // Tilldela anställda
+        SimulateWeek(); // Simulera veckan
 
-        // Simulation of all hair cuts this week
+        Debug.Log("Simulation started!");
+    }
+
+    // Tilldela anställda till salongerna
+    private void AssignEmployeesToSalons()
+    {
         foreach (Company salon in salons)
         {
-            int possibleCustomers = Mathf.Min(customersPerHairdresser * 7, population);
-            List<Person> eligibleCustomers = new List<Person>();
-
-            // Finding all persons wanting a hair cut this week
-            foreach (Person p in people)
+            // Tilldela den första personen som arbetar på salongen
+            if (people.Count > 0)
             {
-                if (p.WantsHaircut(haircutPrice, customersPerHairdresser)) // A person wants hair cut
-                {
-                    eligibleCustomers.Add(p);
-                }
+                people[0].WorksAtSalon = true; // Markera som anställd
             }
-
-            // Customers are send to salon
-            int customersToServe = Mathf.Min(eligibleCustomers.Count, customersPerHairdresser * 7);
-
-            for (int i = 0; i < customersToServe; i++)
-            {
-                Person customer = eligibleCustomers[Random.Range(0, eligibleCustomers.Count)];
-
-                float totalPrice = haircutPrice * (1f + vatHaircut);
-                if (customer.Money >= totalPrice)
-                {
-                    salon.ServeCustomer(customer, vatHaircut);
-                    customer.GetHaircut();  // A person receives hair cut
-                    totalHaircuts++;
-
-                    // The customer received a hair cut
-                    Debug.Log($"{customer.Gender} {customer.Age} was served a haircut for {totalPrice:F2} € (Remaining money: {customer.Money} €).");
-
-                    totalRevenue += totalPrice;
-                    totalVAT += haircutPrice * vatHaircut;
-                }
-                else
-                {
-                    // A person had too little money
-                    Debug.Log($"❌ {customer.Gender} {customer.Age} could not afford a haircut (Needed: {totalPrice} €, but has: {customer.Money} €).");
-                }
-            }
-        }
-
-
-        // The state pays unemployment benefits (to around 10% of people)
-        int unemployedCount = Mathf.RoundToInt(population * 0.1f);
-            for (int i = 0; i < unemployedCount; i++)
-            {
-                Person randomUnemployed = people[Random.Range(0, people.Count)];
-                state.PayUnemployment(randomUnemployed);
-            }
-
-            // Calculate the state's net budget
-            float netBudget = state.GetNetBudget();
-
-            // Update the graph
-            if (graph != null)
-                graph.AddValue(netBudget);
-
-            // Log detailed weekly info
-            Debug.Log(
-                $"📅 Week {currentWeek}:\n" +
-                $"— Haircuts performed: {totalHaircuts}\n" +
-                $"— Total revenue (incl. VAT): {totalRevenue:F2} €\n" +
-                $"— VAT collected: {totalVAT:F2} €\n" +
-                $"— Total taxes collected: {state.totalTaxesCollected:F2} €\n" +
-                $"— Total benefits paid: {state.totalBenefitsPaid:F2} €\n" +
-                $"— Net government budget: {netBudget:F2} €\n"
-            );
-        }
-
-        public void StartSimulation()
-        {
-            if (people == null || people.Count == 0)
-            {
-                Debug.LogError("Error: One must initialize the simulation through SimulationInputs before starting");
-                return;
-            }
-
-            simulationRunning = true;
-            timer = 0f;
-            currentWeek = 0;
-
-            Debug.Log("Simulation started");
         }
     }
+
+    // Simulera en vecka
+    private void SimulateWeek()
+    {
+        // Simulera aktiviteter för hårklippning eller annat
+        SimulateHaircuts();
+
+        // Ge lön till alla som inte arbetar på salongerna
+        PaySalaries();
+    }
+
+    // Ge lön till alla personer som inte arbetar på en salong
+    private void PaySalaries()
+    {
+        foreach (Person p in people)
+        {
+            if (!p.WorksAtSalon) // Om personen inte arbetar på en salong
+            {
+                p.ReceiveSalary(); // Ge dem en lön
+            }
+        }
+    }
+
+    // Metod för att simulera hårklippningar (lägg till din kod här om du vill)
+    private void SimulateHaircuts()
+    {
+        // Din kod för att hantera hårklippningar här (om du vill)
+    }
+
+    // Lägg till en metod för att ta emot inputvärden och initialisera simuleringen
+    public void InitializeSimulation(float price, float vat, int population, int hairdressers, int customersPer, float interval)
+    {
+        this.price = price;
+        this.vat = vat;
+        this.population = population;
+        this.hairdressers = hairdressers;
+        this.customersPer = customersPer;
+        this.interval = interval;
+
+        // Här kan du göra eventuella initialiseringar för din simulering
+        Debug.Log($"Simulation initialized with Price: {price}, VAT: {vat}, Population: {population}, Hairdressers: {hairdressers}, Customers per Hairdresser: {customersPer}, Interval: {interval}");
+    }
+}
