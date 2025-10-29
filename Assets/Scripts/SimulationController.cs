@@ -1,81 +1,171 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SimulationController : MonoBehaviour
 {
-    public List<Person> people; // Lista över alla personer
-    public List<Company> salons; // Lista över alla salonger
+    [Header("References")]
+    public State state;
+    public Graph graph;
+    public GameObject companyPrefab; // optional, can be null
 
-    // De nya variablerna för att lagra de inputvärden som kommer från SimulationInputs
-    private float price;
-    private float vat;
-    private int population;
-    private int hairdressers;
-    private int customersPer;
-    private float interval;
+    [Header("Simulation Data")]
+    public List<Person> people = new List<Person>();
+    public List<Company> salons = new List<Company>();
 
-    // Starta spelet och fördela anställda på salongerna
-    void Start()
+    [Header("Parameters")]
+    private float price = 20f;
+    private float vat = 0.20f;
+    private int population = 100;
+    private int hairdressers = 5;
+    private int customersPer = 5;   // customers per employee (used to set salon capacity)
+    private float interval = 1f;    // seconds per simulated week
+    private int haircutIntervalPerPerson = 8;
+
+    private float timer = 0f;
+    private int currentWeek = 0;
+    private bool simulationRunning = false;
+
+    void Update()
     {
-        // Tilldela anställda till salongerna
-        AssignEmployeesToSalons();
-
-        // Simulera veckan när spelet startar
-        SimulateWeek();
+        if (!simulationRunning) return;
+        timer += Time.deltaTime;
+        if (timer >= interval)
+        {
+            timer = 0f;
+            SimulateWeek();
+        }
     }
 
     public void StartSimulation()
     {
-        // Här kan du kalla på Start() om du vill att Start-logiken ska köras också
-        AssignEmployeesToSalons(); // Tilldela anställda
-        SimulateWeek(); // Simulera veckan
+        if (people == null || people.Count == 0)
+            people = PersonFactory.CreatePeople(population, haircutIntervalPerPerson);
 
+        if (salons == null || salons.Count == 0)
+        {
+            salons = new List<Company>();
+            for (int i = 0; i < hairdressers; i++)
+            {
+                GameObject salonObj;
+                if (companyPrefab != null)
+                    salonObj = Instantiate(companyPrefab);
+                else
+                    salonObj = new GameObject($"Salon_{i + 1}");
+
+                salonObj.name = $"Salon_{i + 1}";
+                Company salon = salonObj.GetComponent<Company>();
+                if (salon == null) salon = salonObj.AddComponent<Company>();
+                salon.Name = salonObj.name;
+                salons.Add(salon);
+            }
+            Debug.Log($"Created {salons.Count} salons.");
+        }
+
+        AssignEmployeesToSalons();
+        ResetAllSalonsForWeek();
+
+        simulationRunning = true;
+        currentWeek = 0;
         Debug.Log("Simulation started!");
     }
 
-    // Tilldela anställda till salongerna
     private void AssignEmployeesToSalons()
     {
         foreach (Company salon in salons)
+            salon.Employees = new List<Person>();
+
+        int idx = 0;
+        while (idx < people.Count)
         {
-            // Tilldela den första personen som arbetar på salongen
-            if (people.Count > 0)
+            foreach (Company salon in salons)
             {
-                people[0].WorksAtSalon = true; // Markera som anställd
+                if (idx >= people.Count) break;
+                salon.AddEmployee(people[idx]);
+                idx++;
             }
+        }
+
+        Debug.Log($"Assigned {idx} employees across {salons.Count} salons.");
+    }
+
+    private void ResetAllSalonsForWeek()
+    {
+        foreach (Company s in salons)
+        {
+            int capacity = Mathf.Max(1, (s.Employees?.Count ?? 1) * customersPer);
+            s.weeklyCapacity = capacity;
+            s.ResetWeek();
         }
     }
 
-    // Simulera en vecka
     private void SimulateWeek()
     {
-        // Simulera aktiviteter för hårklippning eller annat
-        SimulateHaircuts();
+        currentWeek++;
+        Debug.Log($"--- Week {currentWeek} ---");
 
-        // Ge lön till alla som inte arbetar på salongerna
+        // 1) Decrement people's hair countdowns
+        foreach (Person p in people) p.DecrementHairCountdown();
+
+        // 2) Reset salon capacity
+        ResetAllSalonsForWeek();
+
+        // 3) Build list of people who want haircut
+        List<Person> wanting = new List<Person>();
+        foreach (Person p in people)
+            if (p.WantsHaircut()) wanting.Add(p);
+
+        Debug.Log($"People wanting haircut this week: {wanting.Count}");
+
+        // 4) Serve customers salon-by-salon (first-come-first-served on 'wanting' list)
+        int servedCount = 0;
+        foreach (Company salon in salons)
+        {
+            for (int i = wanting.Count - 1; i >= 0; i--)
+            {
+                if (salon.GetRemainingCapacity() <= 0) break;
+
+                Person candidate = wanting[i];
+                bool served = salon.TryServeCustomer(candidate, price, vat, state);
+                if (served)
+                {
+                    candidate.ReceiveHaircut();
+                    wanting.RemoveAt(i);
+                    servedCount++;
+                }
+            }
+        }
+
+        Debug.Log($"Served haircuts this week: {servedCount}. Waiting: {wanting.Count}");
+
+        // 5) Tally revenue
+        float totalRevenue = 0f;
+        foreach (Company salon in salons) totalRevenue += salon.WeeklyRevenue;
+        Debug.Log($"Total haircut revenue this week: {totalRevenue:F2} €");
+
+        // 6) Pay salaries
         PaySalaries();
+
+        // 7) Update graph with state net budget
+        if (state != null && graph != null)
+        {
+            float net = state.GetNetBudget();
+            graph.AddValue(net);
+            Debug.Log($"[Week {currentWeek}] Net budget: {net:F2}");
+        }
+        else
+        {
+            Debug.LogWarning("Graph or State not assigned!");
+        }
     }
 
-    // Ge lön till alla personer som inte arbetar på en salong
     private void PaySalaries()
     {
         foreach (Person p in people)
-        {
-            if (!p.WorksAtSalon) // Om personen inte arbetar på en salong
-            {
-                p.ReceiveSalary(); // Ge dem en lön
-            }
-        }
+            if (!p.WorksAtSalon)
+                p.ReceiveSalary();
     }
 
-    // Metod för att simulera hårklippningar (lägg till din kod här om du vill)
-    private void SimulateHaircuts()
-    {
-        // Din kod för att hantera hårklippningar här (om du vill)
-    }
-
-    // Lägg till en metod för att ta emot inputvärden och initialisera simuleringen
+    // Called from UI to set parameters before StartSimulation
     public void InitializeSimulation(float price, float vat, int population, int hairdressers, int customersPer, float interval)
     {
         this.price = price;
@@ -85,7 +175,6 @@ public class SimulationController : MonoBehaviour
         this.customersPer = customersPer;
         this.interval = interval;
 
-        // Här kan du göra eventuella initialiseringar för din simulering
-        Debug.Log($"Simulation initialized with Price: {price}, VAT: {vat}, Population: {population}, Hairdressers: {hairdressers}, Customers per Hairdresser: {customersPer}, Interval: {interval}");
+        Debug.Log($"Simulation initialized with Price: {price}, VAT: {vat}, Population: {population}, Hairdressers: {hairdressers}, CustomersPer: {customersPer}, Interval: {interval}");
     }
 }

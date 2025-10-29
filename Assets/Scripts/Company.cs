@@ -1,22 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Company : MonoBehaviour
 {
     public string Name { get; set; }
-    public List<Person> Employees { get; set; }
+    public List<Person> Employees { get; set; } = new List<Person>();
 
-    // Metod för att lägga till en anställd
+    public int weeklyCapacity = 50;      // can be set in inspector
+    private int remainingCapacity;
+    public float WeeklyRevenue { get; private set; }
+
+    public void ResetWeek()
+    {
+        remainingCapacity = weeklyCapacity;
+        WeeklyRevenue = 0f;
+    }
+
     public void AddEmployee(Person employee)
     {
+        if (Employees == null) Employees = new List<Person>();
         Employees.Add(employee);
-        employee.WorksAtSalon = true;  // Markera att personen jobbar här
+        employee.WorksAtSalon = true;
     }
 
-    public void AddEmployee(Person employee)
+    // Try to serve a customer, returns true if served
+    public bool TryServeCustomer(Person p, float price, float vat, State state)
     {
-        Employees.Add(employee);  // Lägg till personen i listan
-        employee.WorksAtSalon = true;  // Markera att personen jobbar här
+        if (remainingCapacity <= 0) return false;
+        float totalPaid = price * (1f + vat);
+        WeeklyRevenue += totalPaid;
+        remainingCapacity--;
+
+        if (state != null)
+        {
+            float vatAmount = price * vat;
+            state.CollectTax(vatAmount);
+        }
+
+        p.Money -= totalPaid; // customer pays
+        return true;
     }
+
+    public int GetRemainingCapacity() => remainingCapacity;
 }

@@ -69,10 +69,9 @@ public class GameController : MonoBehaviour
         simulationButtonPanel.SetActive(false);
         graphPanel.SetActive(true);
 
-        // Startar simuleringen här
         if (simulationController != null)
         {
-            simulationController.StartSimulation();  // Anropar den nya metoden
+            simulationController.StartSimulation();
             Debug.Log("5. The simulation has started (SimulationController running)");
         }
         else
