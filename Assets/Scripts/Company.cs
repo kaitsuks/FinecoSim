@@ -11,12 +11,6 @@ public class Company : MonoBehaviour
     public void AddEmployee(Person employee)
     {
         Employees.Add(employee);
-        employee.WorksAtSalon = true;  // Markera att personen jobbar här
-    }
-
-    public void AddEmployee(Person employee)
-    {
-        Employees.Add(employee);  // Lägg till personen i listan
-        employee.WorksAtSalon = true;  // Markera att personen jobbar här
+        employee.WorksAtSalon = true;
     }
 }

@@ -21,7 +21,7 @@
             float money = random.Next(100, 1001);
             string gender = genders[random.Next(genders.Length)];
             string hairStyle = hairStyles[random.Next(hairStyles.Length)];
-            people.Add(new Person(age, money, gender, hairStyle)); // Anropar den nya konstruktorn
+            people.Add(new Person(age, money, gender, hairStyle));
         }
 
         return people;

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
-using UnityEngine.UI.Extensions; // för UILineRenderer
+using UnityEngine.UI.Extensions;
+using UnityEngine;
 
 [RequireComponent(typeof(UILineRenderer))]
 public class Graph : MonoBehaviour
