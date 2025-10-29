@@ -1,42 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Represents one citizen in the economy.
-/// Tracks money, age, gender, and haircut needs.
-/// </summary>
-public class Person
+public class Person : MonoBehaviour
 {
-    public int Age { get; private set; }
+    // Lägg till egenskaper som tidigare
     public float Money { get; set; }
-    public string Gender { get; private set; }
-    public string HairStyle { get; private set; }
-    public int WeeksSinceHaircut { get; private set; }
+    public int Age { get; set; }
+    public string Gender { get; set; }
+    public string HairStyle { get; set; }
+    public bool WorksAtSalon { get; set; } // Flagga som visar om personen arbetar på salongen
 
-    // Constructor
     public Person(int age, float money, string gender, string hairStyle)
     {
         Age = age;
         Money = money;
         Gender = gender;
         HairStyle = hairStyle;
-        WeeksSinceHaircut = 0;
+        WorksAtSalon = false;  // Standardvärde: personen arbetar inte på salongen från början
     }
 
-    // Called every simulated week
-    public void UpdateWeekly()
+    // Metod för att ge lön till personer som inte arbetar på salong
+    public void ReceiveSalary()
     {
-        WeeksSinceHaircut++;
-    }
-
-    // Decide if this person wants a haircut
-    public bool WantsHaircut()
-    {
-        return WeeksSinceHaircut >= 8;
-    }
-
-    // Reset haircut timer
-    public void GetHaircut()
-    {
-        WeeksSinceHaircut = 0;
+        // Om personen inte arbetar på salongen, ge dem en slumpmässig lön
+        if (!WorksAtSalon)
+        {
+            float salary = Random.Range(1800f, 3000f);  // Slumpmässig lön mellan 1800 och 3000 euro
+            Money += salary;
+            Debug.Log($"{Gender} {Age} received a salary of {salary:F2} € (Total money: {Money:F2} €)");
+        }
     }
 }

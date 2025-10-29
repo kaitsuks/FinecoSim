@@ -1,12 +1,12 @@
-using System.Collections.Generic;
-using UnityEngine;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-/// <summary>
-/// Creates many Person objects with randomized attributes.
-/// </summary>
-public static class PersonFactory
-{
-    private static System.Random random = new System.Random();
+    /// <summary>
+    /// Creates many Person objects with randomized attributes.
+    /// </summary>
+    public static class PersonFactory
+    {
+        private static System.Random random = new System.Random();
 
     public static List<Person> CreatePeople(int count)
     {
@@ -21,8 +21,7 @@ public static class PersonFactory
             float money = random.Next(100, 1001);
             string gender = genders[random.Next(genders.Length)];
             string hairStyle = hairStyles[random.Next(hairStyles.Length)];
-
-            people.Add(new Person(age, money, gender, hairStyle));
+            people.Add(new Person(age, money, gender, hairStyle)); // Anropar den nya konstruktorn
         }
 
         return people;

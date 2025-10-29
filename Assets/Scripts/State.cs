@@ -43,4 +43,10 @@ public class State : MonoBehaviour
         return totalTaxesCollected - totalBenefitsPaid
                - healthcareSpending - elderlyCareSpending;
     }
+
+    public void SetVATAtWeek(int week, float newRate, int targetWeek)
+    {
+        if (week == targetWeek)
+            vatHairdresser = newRate;
+    }
 }
