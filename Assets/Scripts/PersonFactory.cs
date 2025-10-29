@@ -1,14 +1,12 @@
-    using System.Collections.Generic;
-    using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine;
 
-    /// <summary>
-    /// Creates many Person objects with randomized attributes.
-    /// </summary>
-    public static class PersonFactory
-    {
-        private static System.Random random = new System.Random();
+public static class PersonFactory
+{
+    private static System.Random random = new System.Random();
 
-    public static List<Person> CreatePeople(int count)
+    // Create people as GameObjects with Person component
+    public static List<Person> CreatePeople(int count, int haircutIntervalPerPerson = 8)
     {
         List<Person> people = new List<Person>();
 
@@ -17,11 +15,16 @@
 
         for (int i = 0; i < count; i++)
         {
+            GameObject go = new GameObject($"Person_{i + 1}");
+            Person p = go.AddComponent<Person>();
+
             int age = random.Next(18, 66);
             float money = random.Next(100, 1001);
             string gender = genders[random.Next(genders.Length)];
             string hairStyle = hairStyles[random.Next(hairStyles.Length)];
-            people.Add(new Person(age, money, gender, hairStyle));
+            p.Init(age, money, gender, hairStyle, haircutIntervalPerPerson);
+
+            people.Add(p);
         }
 
         return people;

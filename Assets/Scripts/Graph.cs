@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
-using UnityEngine.UI.Extensions;
 using UnityEngine;
+using UnityEngine.UI.Extensions;
 
 [RequireComponent(typeof(UILineRenderer))]
 public class Graph : MonoBehaviour
@@ -18,7 +18,7 @@ public class Graph : MonoBehaviour
     [Header("Graph Settings")]
     public int pointCount = 50;
     public float yOffset = 0f;
-    public int scrollStep = 2;
+    public int scrollStep = 1; // how many points to shift left per update
 
     [Header("Label Appearance")]
     public float labelFontSize = 18f;
@@ -44,15 +44,13 @@ public class Graph : MonoBehaviour
             titleText.text = "Government Net Budget";
 
         if (legendText != null)
-            legendText.text = "y over time";
+            legendText.text = "Net budget over time";
 
-        // the main graph
         lineRenderer = GetComponent<UILineRenderer>();
         lineRenderer.color = Color.red;
         lineRenderer.LineThickness = 2f;
         lineRenderer.LineList = false;
 
-        // the line for the average value
         GameObject avgLineObj = new GameObject("AvgLine");
         avgLineObj.transform.SetParent(transform.parent, false);
         avgLineRenderer = avgLineObj.AddComponent<UILineRenderer>();
@@ -60,17 +58,15 @@ public class Graph : MonoBehaviour
         avgLineRenderer.LineThickness = averageLineThickness;
         avgLineRenderer.LineList = true;
 
-        // label for the average value
         if (avgLabelPrefab != null)
         {
             avgLabel = Instantiate(avgLabelPrefab, transform.parent);
             avgLabel.text = "";
         }
 
-        // reference to the parent (GraphPanel)
         graphPanelRect = GetComponentInParent<RectTransform>();
 
-        // creating eticets under the graph
+        // create empty x-axis labels
         for (int i = 0; i < pointCount; i++)
         {
             TextMeshProUGUI lbl = Instantiate(labelPrefab, labelContainer);
@@ -82,22 +78,31 @@ public class Graph : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds a new value and updates the graph.
+    /// </summary>
     public void AddValue(float y)
     {
-        // removing old values if above maximal number        while (values.Count >= pointCount)
-        {
-            for (int i = 0; i < scrollStep && values.Count > 0; i++)
-                values.RemoveAt(0);
-        }
-
-        // adding a new value
+        // add the new value
         values.Add(y);
         totalPointsAdded++;
 
-        // drawing a graph
+        // if we exceeded maximum count -> remove oldest
+        if (values.Count > pointCount)
+        {
+            for (int i = 0; i < scrollStep; i++)
+            {
+                if (values.Count > pointCount)
+                    values.RemoveAt(0);
+            }
+        }
+
         UpdateGraph();
     }
 
+    /// <summary>
+    /// Redraws the entire line and average line.
+    /// </summary>
     private void UpdateGraph()
     {
         if (values.Count == 0 || graphPanelRect == null || lineRenderer == null)
@@ -106,53 +111,50 @@ public class Graph : MonoBehaviour
         float graphWidth = graphPanelRect.rect.width;
         float graphHeight = graphPanelRect.rect.height;
 
-        // counting the average value
+        // 1) Compute average
         float sum = 0f;
         foreach (float v in values) sum += v;
         float avg = sum / values.Count;
 
-        // finding minimmal and maximum values for scaling of graph
+        // 2) Determine min/max and normalize
         float minVal = Mathf.Min(values.ToArray());
         float maxVal = Mathf.Max(values.ToArray());
         float range = Mathf.Max(1f, maxVal - minVal);
 
-        // building points for the line
+        // 3) Build the line points
         Vector2[] points = new Vector2[values.Count];
         for (int i = 0; i < values.Count; i++)
         {
-            // X: propotionally along the width of the graph
             float normX = (i / (float)(pointCount - 1)) * graphWidth;
 
-            // Y: in relation to the average value (0 = middle)
-            float relativeY = (values[i] - avg) / range; // in between -0.5 and 0.5 roughly
-            float normY = relativeY * (graphHeight / 2f); // middle = 0
-
-            // the first point, always start in the middle (0,0)
-            if (i == 0)
-                normY = 0;
+            // Value relative to average, centered vertically
+            float relativeY = (values[i] - avg) / range;
+            float normY = relativeY * (graphHeight / 2f);
 
             points[i] = new Vector2(normX - graphWidth / 2f, normY);
 
-            // labels under the graph
+            // update x-labels
             if (i < xLabels.Count)
             {
                 xLabels[i].rectTransform.anchoredPosition = new Vector2(normX - graphWidth / 2f, -40f);
-                xLabels[i].text = (i % labelInterval == 0) ? $"{totalPointsAdded + i * 2}" : "";
+                xLabels[i].text = (totalPointsAdded - values.Count + i + 1) % labelInterval == 0
+                    ? $"{totalPointsAdded - values.Count + i + 1}"
+                    : "";
             }
         }
 
-        // updating the line
+        // 4) Update line
         lineRenderer.Points = points;
         lineRenderer.SetAllDirty();
 
-        // drawing the line in the middle
+        // 5) Update average line (middle)
         Vector2[] avgPoints = new Vector2[2];
         avgPoints[0] = new Vector2(-graphWidth / 2f, 0);
         avgPoints[1] = new Vector2(graphWidth / 2f, 0);
         avgLineRenderer.Points = avgPoints;
         avgLineRenderer.SetAllDirty();
 
-        // Showing average value to left of (0, middle)
+        // 6) Update average label
         if (avgLabel != null)
         {
             avgLabel.text = $"Avg: {avg:F2}";
