@@ -103,20 +103,16 @@ public class SimulationController : MonoBehaviour
         currentWeek++;
         Debug.Log($"--- Week {currentWeek} ---");
 
-        // 1) Decrement people's hair countdowns
         foreach (Person p in people) p.DecrementHairCountdown();
 
-        // 2) Reset salon capacity
         ResetAllSalonsForWeek();
 
-        // 3) Build list of people who want haircut
         List<Person> wanting = new List<Person>();
         foreach (Person p in people)
             if (p.WantsHaircut()) wanting.Add(p);
 
         Debug.Log($"People wanting haircut this week: {wanting.Count}");
 
-        // 4) Serve customers salon-by-salon (first-come-first-served on 'wanting' list)
         int servedCount = 0;
         foreach (Company salon in salons)
         {
@@ -142,10 +138,8 @@ public class SimulationController : MonoBehaviour
         foreach (Company salon in salons) totalRevenue += salon.WeeklyRevenue;
         Debug.Log($"Total haircut revenue this week: {totalRevenue:F2} €");
 
-        // 6) Pay salaries
         PaySalaries();
 
-        // 7) Update graph with state net budget
         if (state != null && graph != null)
         {
             float net = state.GetNetBudget();
@@ -165,7 +159,6 @@ public class SimulationController : MonoBehaviour
                 p.ReceiveSalary();
     }
 
-    // Called from UI to set parameters before StartSimulation
     public void InitializeSimulation(float price, float vat, int population, int hairdressers, int customersPer, float interval)
     {
         this.price = price;
@@ -176,5 +169,15 @@ public class SimulationController : MonoBehaviour
         this.interval = interval;
 
         Debug.Log($"Simulation initialized with Price: {price}, VAT: {vat}, Population: {population}, Hairdressers: {hairdressers}, CustomersPer: {customersPer}, Interval: {interval}");
+    }
+
+    public void ResetGraph()
+    {
+        if (graph != null)
+        {
+            graph.ClearGraph();
+        }
+
+        Debug.Log("Graph data is reset");
     }
 }

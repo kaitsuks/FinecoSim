@@ -161,4 +161,24 @@ public class Graph : MonoBehaviour
             avgLabel.rectTransform.anchoredPosition = new Vector2(-graphWidth / 2f - 60f, 0f);
         }
     }
+
+    public void ClearGraph()
+    {
+        // Rensa alla punkter och etiketterna
+        values.Clear();
+        totalPointsAdded = 0;
+        lineRenderer.Points = new Vector2[0];  // Tömmer linjen
+        lineRenderer.SetAllDirty();
+
+        avgLineRenderer.Points = new Vector2[0];  // Tömmer medellinjen
+        avgLineRenderer.SetAllDirty();
+
+        // Rensa x-etiketter
+        foreach (TextMeshProUGUI label in xLabels)
+        {
+            label.text = "";
+        }
+
+        Debug.Log("Graph cleared.");
+    }
 }
