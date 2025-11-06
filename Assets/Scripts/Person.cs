@@ -11,14 +11,14 @@ public class Person : MonoBehaviour
     public string HairStyle { get; set; }
     public bool WorksAtSalon { get; set; } // Flagga som visar om personen arbetar på salongen
 
-    public Person(int age, float money, string gender, string hairStyle)
-    {
-        Age = age;
-        Money = money;
-        Gender = gender;
-        HairStyle = hairStyle;
-        WorksAtSalon = false;  // Standardvärde: personen arbetar inte på salongen från början
-    }
+    //public Person(int age, float money, string gender, string hairStyle)
+    //{
+    //    Age = age;
+    //    Money = money;
+    //    Gender = gender;
+    //    HairStyle = hairStyle;
+    //    WorksAtSalon = false;  // Standardvärde: personen arbetar inte på salongen från början
+    //}
 
     // Metod för att ge lön till personer som inte arbetar på salong
     public void ReceiveSalary()

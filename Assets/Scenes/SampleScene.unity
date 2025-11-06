@@ -1821,7 +1821,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 1
   checkPaddingRequired: 0
-  m_isRichText: 1
+  m_isRichText: 0
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2115,8 +2115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b91b9edfcdbde543884c30579d47e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graph: {fileID: 1228911429}
-  updateInterval: 0.5
+  people: []
+  salons: []
 --- !u!4 &992616732
 Transform:
   m_ObjectHideFlags: 0
@@ -6021,14 +6021,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  companyName: Hairdresser
-  basePrice: 20
-  employees: 1
-  wagesPerEmployee: 2000
-  totalRevenue: 0
-  totalWagesPaid: 0
-  totalTaxesPaid: 0
-  government: {fileID: 430440004}
 --- !u!212 &2128756534
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     [Header("UI Panels")]
-    public GameObject startMenuPanel;
-    public GameObject simulationButtonPanel;
-    public GameObject graphPanel;
+    //public GameObject startMenuPanel;
+    //public GameObject simulationButtonPanel;
+    //public GameObject graphPanel;
 
     [Header("References")]
     public Button simulationButton;
@@ -18,24 +18,24 @@ public class GameController : MonoBehaviour
     void Start()
     {
         // Showing only the StartMenu at the beginning
-        startMenuPanel.SetActive(true);
-        simulationButtonPanel.SetActive(false);
-        graphPanel.SetActive(false);
+       // startMenuPanel.SetActive(true);
+       // simulationButtonPanel.SetActive(false);
+       // graphPanel.SetActive(false);
 
         // Connecting the button press to StartSimulation()
-        simulationButton.onClick.AddListener(StartSimulation);
+       // simulationButton.onClick.AddListener(StartSimulation);
     }
 
     void Update()
     {
-        if (!startMenuPassed) // start menu
+        //if (!startMenuPassed) // start menu
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 Debug.Log("1. The start menu has been passed with ENTER");
-                startMenuPassed = true;
-                startMenuPanel.SetActive(false);
-                simulationButtonPanel.SetActive(true);
+                //startMenuPassed = true;
+                //startMenuPanel.SetActive(false);
+                //simulationButtonPanel.SetActive(true);
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
                 Application.Quit();
             }
         }
-        else if (!simulationStarted) // waiting at simulation button
+        //else if (!simulationStarted) // waiting at simulation button
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -51,14 +51,14 @@ public class GameController : MonoBehaviour
                 Application.Quit();
             }
         }
-        else if (simulationStarted) // simulation running
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Debug.Log("6. Cancelled during simulation with ESC");
-                Application.Quit();
-            }
-        }
+        //else if (simulationStarted) // simulation running
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Escape))
+        //    {
+        //        Debug.Log("6. Cancelled during simulation with ESC");
+        //        Application.Quit();
+        //    }
+        //}
     }
 
     public void StartSimulation()
@@ -66,8 +66,8 @@ public class GameController : MonoBehaviour
         Debug.Log("3. The simulation button has been pressed");
         simulationStarted = true;
 
-        simulationButtonPanel.SetActive(false);
-        graphPanel.SetActive(true);
+        //simulationButtonPanel.SetActive(false);
+        //graphPanel.SetActive(true);
 
         // Startar simuleringen här
         if (simulationController != null)

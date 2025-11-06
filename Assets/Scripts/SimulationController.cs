@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class SimulationController : MonoBehaviour
 {
-    public List<Person> people; // Lista över alla personer
-    public List<Company> salons; // Lista över alla salonger
+    //List<Person> people; // Lista över alla personer
+    //List<Company> salons; // Lista över alla salonger
+
+    List<GameObject> people;
+    List<GameObject> salons;
 
     // De nya variablerna för att lagra de inputvärden som kommer från SimulationInputs
     private float price;
@@ -15,14 +18,23 @@ public class SimulationController : MonoBehaviour
     private int customersPer;
     private float interval;
 
+    PersonFactory personFactory;
+
     // Starta spelet och fördela anställda på salongerna
     void Start()
     {
-        // Tilldela anställda till salongerna
-        AssignEmployeesToSalons();
+        //personFactory = new PersonFactory();
+        personFactory = GameObject.Find("Game").GetComponent<PersonFactory>();
+        people = personFactory.CreatePeople(300);
+        foreach(GameObject p in people)
+        {
+            Debug.Log("Person gender: " + p.gameObject.GetComponent<Person>().Gender + ", age " + p.gameObject.GetComponent<Person>().Age);
+        }
 
+        // Tilldela anställda till salongerna
+        //AssignEmployeesToSalons();
         // Simulera veckan när spelet startar
-        SimulateWeek();
+        //SimulateWeek();
     }
 
     public void StartSimulation()
@@ -37,14 +49,14 @@ public class SimulationController : MonoBehaviour
     // Tilldela anställda till salongerna
     private void AssignEmployeesToSalons()
     {
-        foreach (Company salon in salons)
-        {
-            // Tilldela den första personen som arbetar på salongen
-            if (people.Count > 0)
-            {
-                people[0].WorksAtSalon = true; // Markera som anställd
-            }
-        }
+        //foreach (Company salon in salons)
+        //{
+        //    // Tilldela den första personen som arbetar på salongen
+        //    if (people.Count > 0)
+        //    {
+        //        people[0].WorksAtSalon = true; // Markera som anställd
+        //    }
+        //}
     }
 
     // Simulera en vecka
@@ -60,13 +72,13 @@ public class SimulationController : MonoBehaviour
     // Ge lön till alla personer som inte arbetar på en salong
     private void PaySalaries()
     {
-        foreach (Person p in people)
-        {
-            if (!p.WorksAtSalon) // Om personen inte arbetar på en salong
-            {
-                p.ReceiveSalary(); // Ge dem en lön
-            }
-        }
+        //foreach (Person p in people)
+        //{
+        //    if (!p.WorksAtSalon) // Om personen inte arbetar på en salong
+        //    {
+        //        p.ReceiveSalary(); // Ge dem en lön
+        //    }
+        //}
     }
 
     // Metod för att simulera hårklippningar (lägg till din kod här om du vill)
