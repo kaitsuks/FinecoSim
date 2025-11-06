@@ -7,8 +7,11 @@
     public class PersonFactory : MonoBehaviour
 {
         private static System.Random random = new System.Random();
-    public GameObject personPrefab;
-    Vector2Int place;
+    GameObject personPrefab;
+    public GameObject personPrefab1;
+    public GameObject personPrefab2;
+    public GameObject personPrefab3;
+    Vector2 place;
 
     //public List<Person> CreatePeople(int count)
     public List<GameObject> CreatePeople(int count)
@@ -23,8 +26,12 @@
         for (int i = 0; i < count; i++)
         {
             int age = random.Next(18, 66);
-            place.x = random.Next(0, 500);
-            place.y = random.Next(0, 500);
+            //place.x = random.Next(100, 100);
+            //place.y = random.Next(100, 100);
+
+            place.x = Random.Range(-10f, 10f);
+            place.y = Random.Range(-10f, 10f);
+
             float money = random.Next(100, 1001);
             string gender = genders[random.Next(genders.Length)];
             string hairStyle = hairStyles[random.Next(hairStyles.Length)];
@@ -32,16 +39,23 @@
            
             //GameObject clone = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
             //GameObject p = GameObject.Instantiate(personPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-            GameObject p = GameObject.Instantiate(personPrefab, new Vector3(place.x, place.y), Quaternion.identity) as GameObject;
-            //(age, money, gender, hairStyle));
 
+            if(Random.Range(0, 2) == 0) { personPrefab = personPrefab2; } else { personPrefab = personPrefab3; }
+            GameObject p = GameObject.Instantiate(personPrefab, new Vector3( place.x, place.y, 10f), Quaternion.identity) as GameObject;
+            //(age, money, gender, hairStyle));
             p.gameObject.GetComponent<Person>().Age = age;
             p.gameObject.GetComponent<Person>().Money = money;
             p.gameObject.GetComponent<Person>().Gender = gender;
             p.gameObject.GetComponent<Person>().HairStyle = hairStyle;
-
-
             people.Add(p);
+
+            //p = GameObject.Instantiate(personPrefab2, new Vector3(place.x, place.y, 10f), Quaternion.identity) as GameObject;
+            //p.gameObject.GetComponent<Person>().Age = age;
+            //p.gameObject.GetComponent<Person>().Money = money;
+            //p.gameObject.GetComponent<Person>().Gender = gender;
+            //p.gameObject.GetComponent<Person>().HairStyle = hairStyle;
+
+            //people.Add(p);
         }
 
         return people;

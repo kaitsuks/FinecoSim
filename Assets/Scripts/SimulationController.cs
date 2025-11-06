@@ -29,6 +29,7 @@ public class SimulationController : MonoBehaviour
         foreach(GameObject p in people)
         {
             Debug.Log("Person gender: " + p.gameObject.GetComponent<Person>().Gender + ", age " + p.gameObject.GetComponent<Person>().Age);
+            Debug.Log("Person place x: " + p.gameObject.transform.position.x + ", y " + p.gameObject.transform.position.y);
         }
 
         // Tilldela anställda till salongerna
@@ -99,5 +100,10 @@ public class SimulationController : MonoBehaviour
 
         // Här kan du göra eventuella initialiseringar för din simulering
         Debug.Log($"Simulation initialized with Price: {price}, VAT: {vat}, Population: {population}, Hairdressers: {hairdressers}, Customers per Hairdresser: {customersPer}, Interval: {interval}");
+    }
+
+    private void Update()
+    {
+        
     }
 }
