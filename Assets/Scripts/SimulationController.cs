@@ -90,8 +90,10 @@ public class SimulationController : MonoBehaviour
     private void SimulateHaircuts(GameObject p)
     {
         GameObject agent = p;
+        agent.GetComponent<Person>().followTarget.enabled = true;
+
         // Din kod för att hantera hårklippningar här (om du vill)
-        if(agent.GetComponent<Person>().Money > 0f && agent.GetComponent<Person>().hairDresserON)
+        if (agent.GetComponent<Person>().Money > 0f && agent.GetComponent<Person>().hairDresserON)
         {
             //cut hair
             //agent.GetComponent<Person>().hair = 1f;

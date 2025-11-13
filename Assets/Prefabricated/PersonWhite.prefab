@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7217810038169672299}
   - component: {fileID: 289925294788143379}
   - component: {fileID: 3097236456108017022}
-  - component: {fileID: 696777548036168150}
+  - component: {fileID: -5077724414219435735}
   m_Layer: 0
   m_Name: PersonWhite
   m_TagString: human
@@ -233,7 +233,7 @@ MonoBehaviour:
   keepNearStartingPoint: 1
   orientToDirection: 0
   lookAxis: 0
---- !u!114 &696777548036168150
+--- !u!114 &-5077724414219435735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,6 +247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 0}
   target: {fileID: 0}
-  speed: 1
+  speed: 3
   lookAtTarget: 0
   useSide: 0
