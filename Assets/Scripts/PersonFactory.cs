@@ -32,7 +32,7 @@
             //place.y = random.Next(100, 100);
 
             place.x = Random.Range(-10f, 10f);
-            place.y = Random.Range(-10f, 10f);
+            place.y = Random.Range(-4f, -5f);
 
             float money = random.Next(100, 1001);
             string gender = genders[random.Next(genders.Length)];
@@ -51,7 +51,7 @@
             p.gameObject.GetComponent<Person>().HairStyle = hairStyle;
             p.gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
             p.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(Random.Range(0.6f, 1f), Random.Range(0.6f, 1f), Random.Range(0.6f, 1f)); ;
-            hair = Random.Range(1f, 10f);
+            hair = Random.Range(1f, 3f);
             p.gameObject.GetComponent<Person>().hair = hair;
             hairV3 = new Vector3(1f, hair, 1f);
             p.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().transform.localScale = hairV3;

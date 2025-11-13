@@ -95,6 +95,9 @@ GameObject:
   - component: {fileID: 7613295725939816634}
   - component: {fileID: 1232028571069535095}
   - component: {fileID: 7217810038169672299}
+  - component: {fileID: 289925294788143379}
+  - component: {fileID: 3097236456108017022}
+  - component: {fileID: 696777548036168150}
   m_Layer: 0
   m_Name: PersonWhite
   m_TagString: human
@@ -130,6 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fedf05084f5c0de4690c57f7c57babd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hair: 0
+  followTarget: {fileID: 0}
+  hairDresserON: 0
 --- !u!212 &7217810038169672299
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -182,3 +188,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &289925294788143379
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3189089428162417259}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &3097236456108017022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3189089428162417259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4454f5a5fe617419cb40026e1849b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody2D: {fileID: 0}
+  speed: 0.1
+  directionChangeInterval: 3
+  keepNearStartingPoint: 1
+  orientToDirection: 0
+  lookAxis: 0
+--- !u!114 &696777548036168150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3189089428162417259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64b178320bb9134f8c288aa313b9fc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody2D: {fileID: 0}
+  target: {fileID: 0}
+  speed: 1
+  lookAtTarget: 0
+  useSide: 0

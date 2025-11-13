@@ -91,7 +91,7 @@ public class SimulationController : MonoBehaviour
     {
         GameObject agent = p;
         // Din kod för att hantera hårklippningar här (om du vill)
-        if(agent.GetComponent<Person>().Money > 0f)
+        if(agent.GetComponent<Person>().Money > 0f && agent.GetComponent<Person>().hairDresserON)
         {
             //cut hair
             //agent.GetComponent<Person>().hair = 1f;
@@ -100,12 +100,13 @@ public class SimulationController : MonoBehaviour
             agent.GetComponent<Person>().Money -= 5f;
             agent.gameObject.GetComponent<Person>().hair = hair;
             //Debug.Log("Hair CUT! = " + hair);
+            agent.GetComponent<Person>().hairDresserON = false;
         }
-        else
-        {
-            Debug.Log("OUT OF MONEY, DEAD! = " + hair);
-            Destroy(p);
-        }
+        //else
+        //{
+        //    Debug.Log("OUT OF MONEY, DEAD! = " + hair);
+        //    Destroy(p);
+        //}
 
     }
 
