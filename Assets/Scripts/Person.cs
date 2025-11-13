@@ -9,6 +9,8 @@ public class Person : MonoBehaviour
     public int Age { get; set; }
     public string Gender { get; set; }
     public string HairStyle { get; set; }
+
+    public float hair; //hairlength
     public bool WorksAtSalon { get; set; } // Flagga som visar om personen arbetar på salongen
 
     //public Person(int age, float money, string gender, string hairStyle)

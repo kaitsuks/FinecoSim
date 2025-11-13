@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SimulationController : MonoBehaviour
@@ -18,6 +19,9 @@ public class SimulationController : MonoBehaviour
     private int customersPer;
     private float interval;
 
+    float hair;
+    Vector3 hairV3;
+
     PersonFactory personFactory;
 
     // Starta spelet och fördela anställda på salongerna
@@ -26,11 +30,11 @@ public class SimulationController : MonoBehaviour
         //personFactory = new PersonFactory();
         personFactory = GameObject.Find("Game").GetComponent<PersonFactory>();
         people = personFactory.CreatePeople(300);
-        foreach(GameObject p in people)
-        {
-            Debug.Log("Person gender: " + p.gameObject.GetComponent<Person>().Gender + ", age " + p.gameObject.GetComponent<Person>().Age);
-            Debug.Log("Person place x: " + p.gameObject.transform.position.x + ", y " + p.gameObject.transform.position.y);
-        }
+        //foreach(GameObject p in people)
+        //{
+        //    Debug.Log("Person gender: " + p.gameObject.GetComponent<Person>().Gender + ", age " + p.gameObject.GetComponent<Person>().Age);
+        //    Debug.Log("Person place x: " + p.gameObject.transform.position.x + ", y " + p.gameObject.transform.position.y);
+        //}
 
         // Tilldela anställda till salongerna
         //AssignEmployeesToSalons();
@@ -64,7 +68,7 @@ public class SimulationController : MonoBehaviour
     private void SimulateWeek()
     {
         // Simulera aktiviteter för hårklippning eller annat
-        SimulateHaircuts();
+        //SimulateHaircuts();
 
         // Ge lön till alla som inte arbetar på salongerna
         PaySalaries();
@@ -83,9 +87,26 @@ public class SimulationController : MonoBehaviour
     }
 
     // Metod för att simulera hårklippningar (lägg till din kod här om du vill)
-    private void SimulateHaircuts()
+    private void SimulateHaircuts(GameObject p)
     {
+        GameObject agent = p;
         // Din kod för att hantera hårklippningar här (om du vill)
+        if(agent.GetComponent<Person>().Money > 0f)
+        {
+            //cut hair
+            //agent.GetComponent<Person>().hair = 1f;
+            hair = 1f;
+            //take money
+            agent.GetComponent<Person>().Money -= 5f;
+            agent.gameObject.GetComponent<Person>().hair = hair;
+            //Debug.Log("Hair CUT! = " + hair);
+        }
+        else
+        {
+            Debug.Log("OUT OF MONEY, DEAD! = " + hair);
+            Destroy(p);
+        }
+
     }
 
     // Lägg till en metod för att ta emot inputvärden och initialisera simuleringen
@@ -102,8 +123,29 @@ public class SimulationController : MonoBehaviour
         Debug.Log($"Simulation initialized with Price: {price}, VAT: {vat}, Population: {population}, Hairdressers: {hairdressers}, Customers per Hairdresser: {customersPer}, Interval: {interval}");
     }
 
+    //https://discussions.unity.com/t/need-help-with-converting-an-array-to-a-list-in-c/98583/2
     private void Update()
     {
-        
+        GameObject[] peoples = GameObject.FindGameObjectsWithTag("human");
+        people = peoples.ToList();
+
+        foreach (GameObject p in people)
+        {
+            //Debug.Log("Person gender: " + p.gameObject.GetComponent<Person>().Gender + ", age " + p.gameObject.GetComponent<Person>().Age);
+            //Debug.Log("Person place x: " + p.gameObject.transform.position.x + ", y " + p.gameObject.transform.position.y);
+            hair = p.gameObject.GetComponent<Person>().hair;
+            hair += 0.001f;
+            if(hair > 10f ) { SimulateHaircuts(p);  }
+            //Debug.Log("Hair length = " + hair);
+
+            hairV3 = new Vector3(1f, hair, 1f);
+            
+            p.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().transform.localScale = hairV3;
+            p.gameObject.GetComponent<Person>().hair = hair;
+
+
+
+        }
+
     }
 }
