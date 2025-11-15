@@ -20,6 +20,12 @@ public class Person : MonoBehaviour
     {
         followTarget = gameObject.GetComponent<FollowTarget>();
         followTarget.enabled = false;
+        //Invoke("DisableFollowTarget", 1f);
+    }
+
+    void DisableFollowTarget()
+    {
+        followTarget.enabled = false;
     }
 
     //public Person(int age, float money, string gender, string hairStyle)

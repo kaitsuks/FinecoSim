@@ -28,7 +28,7 @@ public class FollowTarget : Physics2DObject
 		hairDressers = GameObject.Find("Targets").GetComponent<HairDressers>();
 		target = hairDressers.targets[Random.Range(0, 8)];
 		Debug.Log("TARGET = " + target);
-		rigidbody2D = GetComponent<Rigidbody2D>();
+		rigidbody2D = this.GetComponent<Rigidbody2D>();
 
 	}
 

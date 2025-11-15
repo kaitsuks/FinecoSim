@@ -21,6 +21,8 @@ public class SimulationController : MonoBehaviour
 
     float hair;
     Vector3 hairV3;
+    float barberIncome;
+    Vector3 barbIncome;
 
     PersonFactory personFactory;
 
@@ -100,7 +102,15 @@ public class SimulationController : MonoBehaviour
             hair = 1f;
             //take money
             agent.GetComponent<Person>().Money -= 5f;
+
             agent.gameObject.GetComponent<Person>().hair = hair;
+
+            //barber income  float barberIncome; Vector3 barbIncome;
+            //Get income from the target barber
+            //add new payment
+            //Set income to the target barber
+            barbIncome = new Vector3(1f, barberIncome, 1f);
+            agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<SpriteRenderer>().transform.localScale = barbIncome;
             //Debug.Log("Hair CUT! = " + hair);
             agent.GetComponent<Person>().hairDresserON = false;
         }
