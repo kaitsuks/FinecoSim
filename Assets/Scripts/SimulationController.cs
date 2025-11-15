@@ -12,8 +12,8 @@ public class SimulationController : MonoBehaviour
     List<GameObject> salons;
 
     // De nya variablerna för att lagra de inputvärden som kommer från SimulationInputs
-    private float price;
-    private float vat;
+    private float price = 5f;
+    public float vat = 0.20f; // valueAddedTax
     private int population;
     private int hairdressers;
     private int customersPer;
@@ -22,7 +22,8 @@ public class SimulationController : MonoBehaviour
     float hair;
     Vector3 hairV3;
     float barberIncome;
-    Vector3 barbIncome;
+    float netIncome;
+    Vector3 barbIncomeV3;
 
     PersonFactory personFactory;
 
@@ -101,16 +102,20 @@ public class SimulationController : MonoBehaviour
             //agent.GetComponent<Person>().hair = 1f;
             hair = 1f;
             //take money
-            agent.GetComponent<Person>().Money -= 5f;
+            agent.GetComponent<Person>().Money -= price;
 
             agent.gameObject.GetComponent<Person>().hair = hair;
 
             //barber income  float barberIncome; Vector3 barbIncome;
             //Get income from the target barber
+            barberIncome = agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<Company>().barberIncome;
+            //calculate net income with VAT
+            netIncome = price * vat;
             //add new payment
+            agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<Company>().barberIncome += netIncome;
             //Set income to the target barber
-            barbIncome = new Vector3(1f, barberIncome, 1f);
-            agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<SpriteRenderer>().transform.localScale = barbIncome;
+            barbIncomeV3 = new Vector3(1f, barberIncome / 100f, 1f);
+            agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<SpriteRenderer>().transform.localScale = barbIncomeV3;
             //Debug.Log("Hair CUT! = " + hair);
             agent.GetComponent<Person>().hairDresserON = false;
         }

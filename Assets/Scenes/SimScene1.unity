@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 11693590}
   - component: {fileID: 11693589}
   - component: {fileID: 11693591}
+  - component: {fileID: 11693592}
   m_Layer: 0
   m_Name: kampaamo (8)
   m_TagString: Untagged
@@ -235,6 +236,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &11693592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11693588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1001 &25957700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -570,6 +584,7 @@ MonoBehaviour:
   target7: {fileID: 1453889648}
   target8: {fileID: 1170941542}
   target9: {fileID: 11693590}
+  target10: {fileID: 1046007443}
   targets: []
 --- !u!4 &233624219
 Transform:
@@ -853,6 +868,7 @@ GameObject:
   - component: {fileID: 353870526}
   - component: {fileID: 353870525}
   - component: {fileID: 353870527}
+  - component: {fileID: 353870528}
   m_Layer: 0
   m_Name: kampaamo (4)
   m_TagString: Untagged
@@ -954,6 +970,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &353870528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353870524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1 &652729970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,13 +1078,14 @@ GameObject:
   - component: {fileID: 747106039}
   - component: {fileID: 747106038}
   - component: {fileID: 747106040}
+  - component: {fileID: 747106041}
   m_Layer: 0
   m_Name: kampaamo (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &747106038
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1150,6 +1180,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &747106041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747106037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1 &779937900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,6 +1204,7 @@ GameObject:
   - component: {fileID: 779937902}
   - component: {fileID: 779937901}
   - component: {fileID: 779937903}
+  - component: {fileID: 779937904}
   m_Layer: 0
   m_Name: kampaamo (5)
   m_TagString: Untagged
@@ -1262,6 +1306,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &779937904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779937900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1 &838362624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1330,7 @@ GameObject:
   - component: {fileID: 838362626}
   - component: {fileID: 838362625}
   - component: {fileID: 838362627}
+  - component: {fileID: 838362628}
   m_Layer: 0
   m_Name: kampaamo
   m_TagString: Untagged
@@ -1374,6 +1432,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &838362628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838362624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1 &1046007441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1456,7 @@ GameObject:
   - component: {fileID: 1046007443}
   - component: {fileID: 1046007442}
   - component: {fileID: 1046007444}
+  - component: {fileID: 1046007445}
   m_Layer: 0
   m_Name: kampaamo (9)
   m_TagString: Untagged
@@ -1486,6 +1558,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1046007445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046007441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1 &1074080616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,6 +1750,7 @@ GameObject:
   - component: {fileID: 1170941542}
   - component: {fileID: 1170941541}
   - component: {fileID: 1170941543}
+  - component: {fileID: 1170941544}
   m_Layer: 0
   m_Name: kampaamo (7)
   m_TagString: Untagged
@@ -1766,6 +1852,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1170941544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170941540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1 &1184619134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,6 +1960,7 @@ GameObject:
   - component: {fileID: 1293861129}
   - component: {fileID: 1293861128}
   - component: {fileID: 1293861130}
+  - component: {fileID: 1293861131}
   m_Layer: 0
   m_Name: kampaamo (2)
   m_TagString: Untagged
@@ -1962,6 +2062,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1293861131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293861127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1 &1341354474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,6 +2170,7 @@ GameObject:
   - component: {fileID: 1427276187}
   - component: {fileID: 1427276186}
   - component: {fileID: 1427276188}
+  - component: {fileID: 1427276189}
   m_Layer: 0
   m_Name: kampaamo (3)
   m_TagString: Untagged
@@ -2158,6 +2272,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1427276189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427276185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1 &1453889646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,6 +2296,7 @@ GameObject:
   - component: {fileID: 1453889648}
   - component: {fileID: 1453889647}
   - component: {fileID: 1453889649}
+  - component: {fileID: 1453889650}
   m_Layer: 0
   m_Name: kampaamo (6)
   m_TagString: Untagged
@@ -2270,6 +2398,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1453889650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453889646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1 &1461906675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2457,6 +2598,7 @@ GameObject:
   - component: {fileID: 2128630967}
   - component: {fileID: 2128630966}
   - component: {fileID: 2128630968}
+  - component: {fileID: 2128630969}
   m_Layer: 0
   m_Name: kampaamo (1)
   m_TagString: Untagged
@@ -2558,6 +2700,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2128630969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128630965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barberIncome: 0
 --- !u!1001 &791702306340464530
 PrefabInstance:
   m_ObjectHideFlags: 0

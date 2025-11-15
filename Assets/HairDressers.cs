@@ -14,13 +14,14 @@ public class HairDressers : MonoBehaviour
     public Transform target7;
     public Transform target8;
     public Transform target9;
+    public Transform target10;
 
     public Transform[] targets;
 
     // Start is called before the first frame update
     void Awake()
     {
-        targets = new Transform[9];
+        targets = new Transform[10];
         targets[0] = target;
         targets[1] = target2;
         targets[2] = target3;
@@ -30,6 +31,7 @@ public class HairDressers : MonoBehaviour
         targets[6] = target7;
         targets[7] = target8;
         targets[8] = target9;
+        targets[9] = target10;
 
     }
 
