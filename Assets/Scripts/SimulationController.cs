@@ -27,11 +27,13 @@ public class SimulationController : MonoBehaviour
     Vector3 barbIncomeV3;
 
     PersonFactory personFactory;
+    Graph graph;
 
     // Starta spelet och fördela anställda på salongerna
     void Start()
     {
-        vat = vatPercentage / 100;
+        graph = GameObject.Find("GraphMaker").GetComponent<Graph>();
+        vat = vatPercentage / 100; //to be fetched elsewhere
         //personFactory = new PersonFactory();
         personFactory = GameObject.Find("Game").GetComponent<PersonFactory>();
         people = personFactory.CreatePeople(300);
@@ -124,6 +126,10 @@ public class SimulationController : MonoBehaviour
             agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<SpriteRenderer>().transform.localScale = barbIncomeV3; //GetComponent<SpriteRenderer>()
             //Debug.Log("Hair CUT! = " + hair);
             agent.GetComponent<Person>().hairDresserON = false;
+            //add to graph line
+            float graphScale = 1f;
+            graph.AddValue(barberIncome * graphScale); //
+
         }
         //else
         //{

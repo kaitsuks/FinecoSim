@@ -41,10 +41,10 @@ public class Graph : MonoBehaviour
     void Start()
     {
         if (titleText != null)
-            titleText.text = "Government Net Budget";
+            titleText.text = "Barber Income";
 
         if (legendText != null)
-            legendText.text = "y over time";
+            legendText.text = "Income over time";
 
         // the main graph
         lineRenderer = GetComponent<UILineRenderer>();
@@ -85,10 +85,10 @@ public class Graph : MonoBehaviour
     public void AddValue(float y)
     {
         // removing old values if above maximal number        while (values.Count >= pointCount)
-        {
-            for (int i = 0; i < scrollStep && values.Count > 0; i++)
-                values.RemoveAt(0);
-        }
+        //{
+        //    for (int i = 0; i < scrollStep && values.Count > 0; i++)
+        //        values.RemoveAt(0);
+        //}
 
         // adding a new value
         values.Add(y);
