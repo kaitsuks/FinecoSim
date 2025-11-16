@@ -2115,8 +2115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b91b9edfcdbde543884c30579d47e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  people: []
-  salons: []
+  price: 0
+  vatPercentage: 0
 --- !u!4 &992616732
 Transform:
   m_ObjectHideFlags: 0
@@ -3692,12 +3692,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436188292}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 956.2856, y: 539.0691, z: -11.925547}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.7144165, y: -0.9309082, z: -11.925547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1531499970}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1444382003
 GameObject:
@@ -4333,6 +4333,7 @@ RectTransform:
   - {fileID: 331910043}
   - {fileID: 1351245426}
   - {fileID: 1668596552}
+  - {fileID: 1436188294}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5783,9 +5784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332518c5e24e3fe4f97def67b442af3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenuPanel: {fileID: 331910042}
-  simulationButtonPanel: {fileID: 1351245425}
-  graphPanel: {fileID: 1668596551}
   simulationButton: {fileID: 1802482656}
   simulationController: {fileID: 992616731}
 --- !u!4 &2002135413
@@ -6021,6 +6019,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barberIncome: 10
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!212 &2128756534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6431,4 +6432,3 @@ SceneRoots:
   - {fileID: 42323493}
   - {fileID: 2002135413}
   - {fileID: 1361338961}
-  - {fileID: 1436188294}
