@@ -248,7 +248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1001 &25957700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -363,6 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b91b9edfcdbde543884c30579d47e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 2
+  vatPercentage: 50
 --- !u!4 &171850365
 Transform:
   m_ObjectHideFlags: 0
@@ -819,11 +823,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348856244}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b91b9edfcdbde543884c30579d47e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 5
+  vatPercentage: 20
 --- !u!114 &348856251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -982,7 +988,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1 &652729970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,7 +1200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 1000
+  barberExpenses: 0.00001
+  bankruptcy: 0
 --- !u!1 &779937900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1318,7 +1328,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1 &838362624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1456,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1 &1046007441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,7 +1584,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1 &1074080616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1864,7 +1880,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1 &1184619134
 GameObject:
   m_ObjectHideFlags: 0
@@ -2074,7 +2092,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1 &1341354474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2284,7 +2304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1 &1453889646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,7 +2432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1 &1461906675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,7 +2736,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f620cff235f49944ba73522ff4bee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barberIncome: 0
+  barberIncome: 100
+  barberExpenses: 0.01
+  bankruptcy: 0
 --- !u!1001 &791702306340464530
 PrefabInstance:
   m_ObjectHideFlags: 0

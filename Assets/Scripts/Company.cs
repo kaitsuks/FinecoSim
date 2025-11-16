@@ -9,9 +9,16 @@ public class Company : MonoBehaviour
 
     public float barberIncome = 10f;
     
-    float barberExpenses = 0.1f;
+    public float barberExpenses = 0.01f;
 
-    public bool bankrupcy = false;
+    public bool bankruptcy = false;
+
+    //SimulationController sim;
+
+    private void Start()
+    {
+        //sim = GameObject.Find("Game").GetComponent<SimulationController>();
+    }
 
     // Metod för att lägga till en anställd
     public void AddEmployee(Person employee)
@@ -28,9 +35,16 @@ public class Company : MonoBehaviour
 
     private void Update()
     {
-        //barberExpenses -= 0.0001f;
         barberIncome -= barberExpenses;
-        if (barberIncome < 0) { bankrupcy = true; Debug.Log("Barber " + this + " bankrupted! "); }
+        if (barberIncome < 0) { bankruptcy = true; Debug.Log("Barber " + this + " bankrupted! "); }
+        if(bankruptcy)
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
 
     }
 }
