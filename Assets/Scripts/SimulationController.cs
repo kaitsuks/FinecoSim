@@ -116,17 +116,19 @@ public class SimulationController : MonoBehaviour
             barberIncome = agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<Company>().barberIncome;
             //calculate net income with VAT
             netIncome = price * vat;
-            Debug.Log("Barber netIncome = " + netIncome);
+            //Debug.Log("Barber netIncome = " + netIncome);
             //add new payment
             agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<Company>().barberIncome += netIncome;
             //Set income to the target barber
             barbIncomeV3 = new Vector3(0.2f, barberIncome / 300f, 1f);
-            Debug.Log("Barber cumulated income = " + barberIncome);
+           // Debug.Log("Barber cumulated income = " + barberIncome);
             //barbIncomeV3 = new Vector3(1f, 100f, 1f); //test income graphics
             //show barber cumulated income
             agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().transform.localScale = barbIncomeV3; //GetComponent<SpriteRenderer>()
             //Debug.Log("Hair CUT! = " + hair);
             //tell the customer to sit still for a while
+            //agent.GetComponent<Person>().wander.enabled = false; //not necessary?
+            agent.GetComponent<Person>().isWandering = false;
             agent.GetComponent<Person>().SitInBarbershop();            
              
             //add to graph line
@@ -190,7 +192,14 @@ public class SimulationController : MonoBehaviour
             //Debug.Log("Person place x: " + p.gameObject.transform.position.x + ", y " + p.gameObject.transform.position.y);
             hair = p.gameObject.GetComponent<Person>().hair;
             hair += 0.001f;
-            if(hair > 10f ) { SimulateHaircuts(p);  }
+            if(hair > 10f ) { p.gameObject.GetComponent<Person>().isWandering = false;
+                p.gameObject.GetComponent<Person>().isStopped = false;
+                SimulateHaircuts(p);  }
+            else
+            {
+                p.gameObject.GetComponent<Person>().isWandering = true;
+                p.gameObject.GetComponent<Person>().isStopped = true;
+            }
             //Debug.Log("Hair length = " + hair);
 
             hairV3 = new Vector3(1f, hair, 1f);

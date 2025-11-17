@@ -9,7 +9,7 @@ public class Wander : Physics2DObject
 {
 	[Header("Movement")]
 	public float speed = 1f;
-	public float directionChangeInterval = 3f;
+	float directionChangeInterval = 0.1f;
 	public bool keepNearStartingPoint = true;
 
 	[Header("Orientation")]
@@ -77,6 +77,15 @@ public class Wander : Physics2DObject
 	// FixedUpdate is called every frame when the physics are calculated
 	private void FixedUpdate()
 	{
-		rigidbody2D.AddForce(direction * speed);
+		if (gameObject.GetComponent<Person>().isWandering)
+		{
+			rigidbody2D.AddForce(direction * speed);
+		}
+		//else
+		//{
+		//	//stop the agent
+		//	rigidbody2D.AddForce(-direction * speed);
+		//	rigidbody2D.velocity = Vector2.zero;
+		//}
 	}
 }

@@ -79,7 +79,7 @@ public class Graph : MonoBehaviour
         //    rt.sizeDelta = labelSize;
         //    lbl.fontSize = labelFontSize;
         //    xLabels.Add(lbl);
-        //}
+        //} 
     }
 
     public void AddValue(float y)

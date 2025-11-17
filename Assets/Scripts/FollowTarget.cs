@@ -10,10 +10,12 @@ public class FollowTarget : Physics2DObject
 	public Transform target;
 	HairDressers hairDressers;
 	//public GameObject targetObject;
+	Vector2 direction;
+	bool isStopped;
 
 	[Header("Movement")]
 	// Speed used to move towards the target
-	public float speed = 1f;
+	float speed = 0.2f;
 
 	// Used to decide if the object will look at the target while pursuing it
 	public bool lookAtTarget = false;
@@ -35,10 +37,10 @@ public class FollowTarget : Physics2DObject
     // FixedUpdate is called once per frame
     void FixedUpdate ()
 	{
+		direction = target.position - transform.position;
 		//do nothing if the target hasn't been assigned or it was detroyed for some reason
-		if(target == null)
+		if (target == null)
 			return;
-
 		//look towards the target
 		if(lookAtTarget)
 		{
@@ -46,7 +48,17 @@ public class FollowTarget : Physics2DObject
 		}
 		
 		//Move towards the target
-		rigidbody2D.MovePosition(Vector2.Lerp(transform.position, target.position, Time.fixedDeltaTime * speed));
+		if (!gameObject.GetComponent<Person>().isWandering && !gameObject.GetComponent<Person>().isStopped)
+		{			
+			rigidbody2D.AddForce(direction * speed);
+			//rigidbody2D.MovePosition(Vector2.Lerp(transform.position, target.position, Time.fixedDeltaTime * speed));
+		}
+        if (!gameObject.GetComponent<Person>().isWandering && gameObject.GetComponent<Person>().isStopped)
+        {
+            rigidbody2D.AddForce(-direction * speed);
+            rigidbody2D.velocity = Vector2.zero;
+        }
 
-	}
+
+    }
 }
