@@ -25,6 +25,7 @@ public class SimulationController : MonoBehaviour
     float barberIncome;
     float netIncome;
     Vector3 barbIncomeV3;
+    bool hairIsCut;
 
     PersonFactory personFactory;
     Graph graph;
@@ -33,7 +34,7 @@ public class SimulationController : MonoBehaviour
     void Start()
     {
         graph = GameObject.Find("GraphMaker").GetComponent<Graph>();
-        vat = vatPercentage / 100; //to be fetched elsewhere
+        vat = vatPercentage / 100; //to be fetched elsewhere later
         //personFactory = new PersonFactory();
         personFactory = GameObject.Find("Game").GetComponent<PersonFactory>();
         people = personFactory.CreatePeople(300);
@@ -119,13 +120,15 @@ public class SimulationController : MonoBehaviour
             //add new payment
             agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<Company>().barberIncome += netIncome;
             //Set income to the target barber
-            barbIncomeV3 = new Vector3(1f, barberIncome / 100f, 1f);
+            barbIncomeV3 = new Vector3(0.2f, barberIncome / 300f, 1f);
             Debug.Log("Barber cumulated income = " + barberIncome);
             //barbIncomeV3 = new Vector3(1f, 100f, 1f); //test income graphics
             //show barber cumulated income
-            agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<SpriteRenderer>().transform.localScale = barbIncomeV3; //GetComponent<SpriteRenderer>()
+            agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().transform.localScale = barbIncomeV3; //GetComponent<SpriteRenderer>()
             //Debug.Log("Hair CUT! = " + hair);
-            agent.GetComponent<Person>().hairDresserON = false;
+            //tell the customer to sit still for a while
+            agent.GetComponent<Person>().SitInBarbershop();            
+             
             //add to graph line
             float graphScale = 1f;
             graph.AddValue(barberIncome * graphScale); //
@@ -136,7 +139,29 @@ public class SimulationController : MonoBehaviour
         //    Debug.Log("OUT OF MONEY, DEAD! = " + hair);
         //    Destroy(p);
         //}
+    }
+    public void CuttingHair() // NOT IN USE
+    {
+        hairIsCut = true;
+        return;
+    }
 
+    IEnumerator DelayedHairCut() //NOT IN USE
+    {
+
+        yield return new WaitForSeconds(5f);
+        hairIsCut = true;
+    }
+
+    public void CutHairDelay(GameObject agent) // NOT IN USE
+    {
+        if (!hairIsCut) Invoke("CuttingHair", 10f);
+        if (hairIsCut)
+        {
+            agent.GetComponent<Person>().hairDresserON = false;
+            hairIsCut = false;
+            return;
+        }
     }
 
     // Lägg till en metod för att ta emot inputvärden och initialisera simuleringen

@@ -7,9 +7,9 @@ public class Company : MonoBehaviour
     public string Name { get; set; }
     public List<Person> Employees { get; set; }
 
-    public float barberIncome = 10f;
+    public float barberIncome = 10f; //start capital
     
-    public float barberExpenses = 0.01f;
+    float barberExpenses = 0.0001f;
 
     public bool bankruptcy = false;
 

@@ -71,15 +71,15 @@ public class Graph : MonoBehaviour
         graphPanelRect = GetComponentInParent<RectTransform>();
 
         // creating eticets under the graph
-        for (int i = 0; i < pointCount; i++)
-        {
-            TextMeshProUGUI lbl = Instantiate(labelPrefab, labelContainer);
-            lbl.text = "";
-            RectTransform rt = lbl.GetComponent<RectTransform>();
-            rt.sizeDelta = labelSize;
-            lbl.fontSize = labelFontSize;
-            xLabels.Add(lbl);
-        }
+        //for (int i = 0; i < pointCount; i++)
+        //{
+        //    TextMeshProUGUI lbl = Instantiate(labelPrefab, labelContainer);
+        //    lbl.text = "";
+        //    RectTransform rt = lbl.GetComponent<RectTransform>();
+        //    rt.sizeDelta = labelSize;
+        //    lbl.fontSize = labelFontSize;
+        //    xLabels.Add(lbl);
+        //}
     }
 
     public void AddValue(float y)

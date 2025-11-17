@@ -14,11 +14,14 @@ public class Person : MonoBehaviour
     public bool WorksAtSalon { get; set; } // Flagga som visar om personen arbetar på salongen
 
     public FollowTarget followTarget;
+    public Wander wander;
     public bool hairDresserON;
 
     private void Start()
     {
         followTarget = gameObject.GetComponent<FollowTarget>();
+        wander = gameObject.GetComponent<Wander>();
+        wander.enabled = true;
         followTarget.enabled = false;
         //Invoke("DisableFollowTarget", 1f);
     }
@@ -49,14 +52,31 @@ public class Person : MonoBehaviour
         }
     }
 
+    public void SitInBarbershop()
+    {
+        wander.enabled = false;
+        StartCoroutine(DelayedHairCut());
+    }
+
+    IEnumerator DelayedHairCut()
+    {
+        Debug.Log("Time 1. " + Time.frameCount);
+        
+        yield return new WaitForSeconds(15f);
+        //followTarget.enabled = true;
+        wander.enabled = true;
+        hairDresserON = false;
+        Debug.Log("Time 2. " + Time.frameCount);
+    }
+
     private void Update()
     {
         //public static float Distance(Vector2 a, Vector2 b);
-        if(Vector2.Distance(this.transform.position, followTarget.target.transform.position) < 1f) { followTarget.enabled = false;
+        if(Vector2.Distance(this.transform.position, followTarget.target.transform.position) < 0.1f) { followTarget.enabled = false;
             //hair = 1f;
-            hairDresserON = true;
+            hairDresserON = true; //go to barbershop
         }
-        //if (hair > 4f) { followTarget.enabled = true; }
-        //if (hair  < 2f) { followTarget.enabled = false; }
+        //if (!hairDresserON) { followTarget.enabled = false; }
+        //if (hairDresserON) { followTarget.enabled = true; }
     }
 }
