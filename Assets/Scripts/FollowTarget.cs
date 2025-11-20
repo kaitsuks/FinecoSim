@@ -25,13 +25,13 @@ public class FollowTarget : Physics2DObject
 	// The direction that will face the target
 	public Enums.Directions useSide = Enums.Directions.Up;
 
-    private void Awake()
-    {
+	private void Awake()
+	{
 		originalPosition = transform.position;
-		
-			//target = new Transform()
-			//target = targetObject.transform;
-			hairDressers = GameObject.Find("Targets").GetComponent<HairDressers>();
+
+		//target = new Transform()
+		//target = targetObject.transform;
+		hairDressers = GameObject.Find("Targets").GetComponent<HairDressers>();
 		target = hairDressers.targets[Random.Range(0, 10)];
 		targetPosition = target.position;
 		//Debug.Log("TARGET = " + target);
@@ -39,8 +39,8 @@ public class FollowTarget : Physics2DObject
 
 	}
 
-    // FixedUpdate is called once per frame
-    void FixedUpdate ()
+	// FixedUpdate is called once per frame
+	void FixedUpdate()
 	{
 		//if (gameObject.GetComponent<Person>().hair > 1f)
 		//{
@@ -51,32 +51,40 @@ public class FollowTarget : Physics2DObject
 		//	direction =  (Vector2) transform.position - originalPosition;
 		//}
 		//do nothing if the target hasn't been assigned or it was detroyed for some reason
-		if (!gameObject.GetComponent<Person>().isHairCut)
-        {
+
+		if (gameObject.GetComponent<Person>().isHairCut)
+		{
 			targetPosition = originalPosition;
 			gameObject.GetComponent<Person>().isWandering = false;
 
-		} 
-			if (target == null)
+		}
+		if (!gameObject.GetComponent<Person>().isHairCut)
+		{
+			targetPosition = target.position;
+		}
+
+		if (target == null)
 			return;
 		//look towards the target
-		if(lookAtTarget)
+		if (lookAtTarget)
 		{
 			Utils.SetAxisTowards(useSide, transform, target.position - transform.position);
 		}
-		
+
 		//Move towards the target
-		if (!gameObject.GetComponent<Person>().isWandering && !gameObject.GetComponent<Person>().isStopped)
-		{			
+		//if (!gameObject.GetComponent<Person>().isWandering && !gameObject.GetComponent<Person>().isStopped)
+		if (gameObject.GetComponent<Person>().isFollowing)
+		{
 			//rigidbody2D.AddForce(direction * speed);
 			rigidbody2D.MovePosition(Vector2.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * speed));
 		}
-        //if (!gameObject.GetComponent<Person>().isWandering && gameObject.GetComponent<Person>().isStopped)
-        //{
-        //    //rigidbody2D.AddForce(-direction * speed);
-        //    rigidbody2D.velocity = Vector2.zero;
-        //}
+		if (Vector2.Distance(this.transform.position, originalPosition) < 0.1f)
+		{
+			gameObject.GetComponent<Person>().isFollowing = false;
+			gameObject.GetComponent<Person>().isWandering = true;
+			gameObject.GetComponent<Person>().isHairCut = false;
+			Debug.Log("HOME REACHED!!!! ");
 
-
-    }
+		}
+	}
 }

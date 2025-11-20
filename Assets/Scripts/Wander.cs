@@ -8,8 +8,8 @@ using System.Collections;
 public class Wander : Physics2DObject
 {
 	[Header("Movement")]
-	float speed = 0.003f;
-	float directionChangeInterval = 1f;
+	float speed = 0.01f;
+	float directionChangeInterval;
 	public bool keepNearStartingPoint = true;
 
 	[Header("Orientation")]
@@ -26,8 +26,9 @@ public class Wander : Physics2DObject
 	// Start is called at the beginning of the game
 	private void Start()
 	{
+		directionChangeInterval = Random.Range(0.11f, 3.0f);
 		//we don't want directionChangeInterval to be 0, so we force it to a minimum value ;)
-		if(directionChangeInterval < 0.1f)
+		if (directionChangeInterval < 0.1f)
 		{
 			directionChangeInterval = 0.1f;
 		}
@@ -46,6 +47,7 @@ public class Wander : Physics2DObject
 	{
 		while(true)
 		{
+			//Debug.Log("CHANGING DIRECTION!");
 			direction = Random.insideUnitCircle * 100f; //change the direction the player is going
 			//direction = new Vector2(Random.Range(0f, 3f), Random.Range(0f, 3f));
 
@@ -77,19 +79,20 @@ public class Wander : Physics2DObject
 
 
 	// FixedUpdate is called every frame when the physics are calculated
-	private void FixedUpdate()
+	private void Update()
 	{
 		if (gameObject.GetComponent<Person>().isWandering)
 		{
+			//Debug.Log("Wandering!");
 			//rigidbody2D.AddForce(direction * speed);
 			//.MovePosition(Vector2.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * speed));
 			rigidbody2D.MovePosition(Vector2.Lerp(transform.position, direction, Time.fixedDeltaTime * speed));
 		}
-        //else
-        //{
-        //    //stop the agent
-        //    //rigidbody2D.AddForce(-direction * speed);
-        //    rigidbody2D.velocity = Vector2.zero;
-        //}
+		if (gameObject.GetComponent<Person>().isStopped)
+        {
+            //stop the agent
+            //rigidbody2D.AddForce(-direction * speed);
+            rigidbody2D.velocity = Vector2.zero;
+        }
     }
 }

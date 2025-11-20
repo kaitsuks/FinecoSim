@@ -135,7 +135,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hair: 0
   followTarget: {fileID: 0}
+  wander: {fileID: 0}
   hairDresserON: 0
+  isWandering: 1
+  isStopped: 0
+  isHairCut: 0
+  isFollowing: 0
 --- !u!212 &7217810038169672299
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -228,8 +233,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 0}
-  speed: 0.1
-  directionChangeInterval: 3
   keepNearStartingPoint: 1
   orientToDirection: 0
   lookAxis: 0
@@ -247,6 +250,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 0}
   target: {fileID: 0}
-  speed: 3
   lookAtTarget: 0
   useSide: 0

@@ -25,7 +25,7 @@ public class SimulationController : MonoBehaviour
     float barberIncome;
     float netIncome;
     Vector3 barbIncomeV3;
-    bool hairIsCut;
+    //bool hairIsCut;
 
     PersonFactory personFactory;
     Graph graph;
@@ -144,24 +144,27 @@ public class SimulationController : MonoBehaviour
     }
     public void CuttingHair() // NOT IN USE
     {
-        hairIsCut = true;
+        Debug.Log("CuttingHair NOT IN USE!");
+        //hairIsCut = true;
         return;
     }
 
     IEnumerator DelayedHairCut() //NOT IN USE
     {
+        Debug.Log("DelayedHairCut NOT IN USE!");
 
         yield return new WaitForSeconds(5f);
-        hairIsCut = true;
+        //hairIsCut = true;
     }
 
     public void CutHairDelay(GameObject agent) // NOT IN USE
     {
-        if (!hairIsCut) Invoke("CuttingHair", 10f);
-        if (hairIsCut)
+        Debug.Log("CutHairDelay NOT IN USE!");
+        //if (!hairIsCut) Invoke("CuttingHair", 10f);
+        //if (hairIsCut)
         {
             agent.GetComponent<Person>().hairDresserON = false;
-            hairIsCut = false;
+            //hairIsCut = false;
             return;
         }
     }
@@ -192,9 +195,16 @@ public class SimulationController : MonoBehaviour
             //Debug.Log("Person place x: " + p.gameObject.transform.position.x + ", y " + p.gameObject.transform.position.y);
             hair = p.gameObject.GetComponent<Person>().hair;
             hair += 0.001f;
-            if(hair > 10f ) { p.gameObject.GetComponent<Person>().isWandering = false;
-                //p.gameObject.GetComponent<Person>().isStopped = false;
-                SimulateHaircuts(p);  }
+            p.gameObject.GetComponent<Person>().hair = hair;
+            if (hair > 10f)
+            {
+                p.gameObject.GetComponent<Person>().isWandering = false;
+                p.gameObject.GetComponent<Person>().isFollowing = true;
+                p.gameObject.GetComponent<Person>().isStopped = false;
+                if (p.gameObject.GetComponent<Person>().hairDresserON) { 
+                    SimulateHaircuts(p);
+            }
+            }
             //else
             //{
             //    p.gameObject.GetComponent<Person>().isWandering = true;
@@ -205,7 +215,7 @@ public class SimulationController : MonoBehaviour
             hairV3 = new Vector3(1f, hair, 1f);
             
             p.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().transform.localScale = hairV3;
-            p.gameObject.GetComponent<Person>().hair = hair;
+            //p.gameObject.GetComponent<Person>().hair = hair;
 
 
 
