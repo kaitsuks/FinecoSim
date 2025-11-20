@@ -18,6 +18,8 @@ public class Person : MonoBehaviour
     public bool hairDresserON;
     public bool isWandering = true;
     public bool isStopped = false;
+    public bool isHairCut = true;
+    public bool isFollowing = true;
 
     private void Start()
     {
@@ -59,6 +61,8 @@ public class Person : MonoBehaviour
         //wander.enabled = false;
         isWandering = false;
         StartCoroutine(DelayedHairCut());
+        //isWandering = true;
+        isStopped = false;
     }
 
     IEnumerator DelayedHairCut()
@@ -67,22 +71,24 @@ public class Person : MonoBehaviour
         //Debug.Log("Time 1. " + Time.time);
         followTarget.enabled = false;
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(15f);
         //followTarget.enabled = true;
         //wander.enabled = true;
         hairDresserON = false;
         float barberTimeEnd = Time.time;
         //Debug.Log("Time 2. " + Time.time);
         //isWandering = true;
-        isWandering = true;
-        isStopped = false;
+        //isWandering = true;
+        //isStopped = false;
+        isHairCut = false;
+        isFollowing = false;
         Debug.Log("Barber Time TOTAL " + (barberTimeEnd - barberTimeStart));
     }
 
     private void Update()
     {
         //public static float Distance(Vector2 a, Vector2 b);
-        if(Vector2.Distance(this.transform.position, followTarget.target.transform.position) < 1f) { followTarget.enabled = false;
+        if(Vector2.Distance(this.transform.position, followTarget.target.transform.position) < 0.1f) { followTarget.enabled = false;
             //hair = 1f;
             hairDresserON = true; //go to barbershop
             isStopped = true;

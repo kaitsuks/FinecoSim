@@ -405,7 +405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1001 &25957700
 PrefabInstance:
@@ -792,7 +791,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1046007443}
@@ -876,7 +875,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1293861129}
@@ -1202,8 +1201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b91b9edfcdbde543884c30579d47e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 2
-  vatPercentage: 50
+  price: 100
+  vatPercentage: 20
 --- !u!4 &171850365
 Transform:
   m_ObjectHideFlags: 0
@@ -1544,7 +1543,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 838362626}
@@ -1830,7 +1829,6 @@ GameObject:
   m_Component:
   - component: {fileID: 348856253}
   - component: {fileID: 348856251}
-  - component: {fileID: 348856247}
   - component: {fileID: 348856245}
   m_Layer: 0
   m_Name: Controller
@@ -1863,20 +1861,6 @@ MonoBehaviour:
   elderlyCareSpending: 800
   totalTaxesCollected: 0
   totalBenefitsPaid: 0
---- !u!114 &348856247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348856244}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b91b9edfcdbde543884c30579d47e21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  price: 5
-  vatPercentage: 20
 --- !u!114 &348856251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1890,7 +1874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulationButton: {fileID: 0}
-  simulationController: {fileID: 348856247}
+  simulationController: {fileID: 0}
 --- !u!224 &348856253
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2037,7 +2021,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1 &371611235
 GameObject:
@@ -2066,7 +2049,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1170941542}
@@ -3359,7 +3342,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 1000
-  barberExpenses: 0.00001
   bankruptcy: 0
 --- !u!1 &779937900
 GameObject:
@@ -3488,7 +3470,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1 &838362624
 GameObject:
@@ -3617,7 +3598,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1001 &881873918
 PrefabInstance:
@@ -3839,7 +3819,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2128630967}
@@ -4210,7 +4190,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1 &1074080616
 GameObject:
@@ -4323,7 +4302,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 353870526}
@@ -4898,7 +4877,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1 &1184619134
 GameObject:
@@ -5116,7 +5094,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1453889648}
@@ -5434,7 +5412,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1 &1303088698
 GameObject:
@@ -5463,7 +5440,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 11693590}
@@ -5765,7 +5742,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 779937902}
@@ -5949,7 +5926,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1 &1453889646
 GameObject:
@@ -6078,7 +6054,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1 &1461906675
 GameObject:
@@ -7140,7 +7115,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1427276187}
@@ -9185,7 +9160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barberIncome: 100
-  barberExpenses: 0.01
   bankruptcy: 0
 --- !u!1 &2140161622
 GameObject:

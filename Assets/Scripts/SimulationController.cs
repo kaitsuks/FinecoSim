@@ -128,7 +128,7 @@ public class SimulationController : MonoBehaviour
             //Debug.Log("Hair CUT! = " + hair);
             //tell the customer to sit still for a while
             //agent.GetComponent<Person>().wander.enabled = false; //not necessary?
-            agent.GetComponent<Person>().isWandering = false;
+            //agent.GetComponent<Person>().isWandering = false;
             agent.GetComponent<Person>().SitInBarbershop();            
              
             //add to graph line
@@ -193,13 +193,13 @@ public class SimulationController : MonoBehaviour
             hair = p.gameObject.GetComponent<Person>().hair;
             hair += 0.001f;
             if(hair > 10f ) { p.gameObject.GetComponent<Person>().isWandering = false;
-                p.gameObject.GetComponent<Person>().isStopped = false;
+                //p.gameObject.GetComponent<Person>().isStopped = false;
                 SimulateHaircuts(p);  }
-            else
-            {
-                p.gameObject.GetComponent<Person>().isWandering = true;
-                p.gameObject.GetComponent<Person>().isStopped = true;
-            }
+            //else
+            //{
+            //    p.gameObject.GetComponent<Person>().isWandering = true;
+            //    //p.gameObject.GetComponent<Person>().isStopped = true;
+            //}
             //Debug.Log("Hair length = " + hair);
 
             hairV3 = new Vector3(1f, hair, 1f);

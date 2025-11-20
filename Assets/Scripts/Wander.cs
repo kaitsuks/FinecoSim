@@ -8,8 +8,8 @@ using System.Collections;
 public class Wander : Physics2DObject
 {
 	[Header("Movement")]
-	public float speed = 1f;
-	float directionChangeInterval = 0.1f;
+	float speed = 0.003f;
+	float directionChangeInterval = 1f;
 	public bool keepNearStartingPoint = true;
 
 	[Header("Orientation")]
@@ -20,6 +20,7 @@ public class Wander : Physics2DObject
 
 	private Vector2 direction;
 	private Vector3 startingPoint;
+	Vector3 targetPosition;
 
 
 	// Start is called at the beginning of the game
@@ -45,19 +46,20 @@ public class Wander : Physics2DObject
 	{
 		while(true)
 		{
-			direction = Random.insideUnitCircle; //change the direction the player is going
+			direction = Random.insideUnitCircle * 100f; //change the direction the player is going
+			//direction = new Vector2(Random.Range(0f, 3f), Random.Range(0f, 3f));
 
 			// if we need to keep near the starting point...
-			if(keepNearStartingPoint)
-			{
-				// we measure the distance from it...
-				float distanceFromStart = Vector2.Distance(startingPoint, transform.position);
-				if(distanceFromStart > 1f + (speed * 0.1f)) // and if it's too much...
-				{
-					//... we get a direction that points back to the starting point
-					direction = (startingPoint - transform.position).normalized;
-				}
-			}
+			//if (keepNearStartingPoint)
+			//{
+			//	// we measure the distance from it...
+			//	float distanceFromStart = Vector2.Distance(startingPoint, transform.position);
+			//	if(distanceFromStart > 1f + (speed * 0.1f)) // and if it's too much...
+			//	{
+			//		//... we get a direction that points back to the starting point
+			//		direction = (startingPoint - transform.position).normalized;
+			//	}
+			//}
 
 
 			//if the object has to look in the direction of movement
@@ -79,13 +81,15 @@ public class Wander : Physics2DObject
 	{
 		if (gameObject.GetComponent<Person>().isWandering)
 		{
-			rigidbody2D.AddForce(direction * speed);
+			//rigidbody2D.AddForce(direction * speed);
+			//.MovePosition(Vector2.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * speed));
+			rigidbody2D.MovePosition(Vector2.Lerp(transform.position, direction, Time.fixedDeltaTime * speed));
 		}
-		//else
-		//{
-		//	//stop the agent
-		//	rigidbody2D.AddForce(-direction * speed);
-		//	rigidbody2D.velocity = Vector2.zero;
-		//}
-	}
+        //else
+        //{
+        //    //stop the agent
+        //    //rigidbody2D.AddForce(-direction * speed);
+        //    rigidbody2D.velocity = Vector2.zero;
+        //}
+    }
 }
