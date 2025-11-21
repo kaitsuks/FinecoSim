@@ -11,6 +11,7 @@ public class FollowTarget : Physics2DObject
 	Vector2 originalPosition;
 	Vector2 targetPosition;
 	HairDressers hairDressers;
+	PublicBars publicBars;
 	//public GameObject targetObject;
 	Vector2 direction;
 	bool isStopped;
@@ -32,7 +33,9 @@ public class FollowTarget : Physics2DObject
 		//target = new Transform()
 		//target = targetObject.transform;
 		hairDressers = GameObject.Find("Targets").GetComponent<HairDressers>();
+		publicBars = GameObject.Find("Targets").GetComponent<PublicBars>();
 		target = hairDressers.targets[Random.Range(0, 10)];
+		//target = publicBars.targets[Random.Range(0, 5)];
 		targetPosition = target.position;
 		//Debug.Log("TARGET = " + target);
 		rigidbody2D = this.GetComponent<Rigidbody2D>();

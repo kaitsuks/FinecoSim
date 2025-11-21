@@ -22,7 +22,7 @@ public class SimulationController : MonoBehaviour
 
     float hair;
     Vector3 hairV3;
-    float barberIncome;
+    float income;
     float netIncome;
     Vector3 barbIncomeV3;
     //bool hairIsCut;
@@ -113,14 +113,14 @@ public class SimulationController : MonoBehaviour
 
             //barber income  float barberIncome; Vector3 barbIncome;
             //Get income from the target barber
-            barberIncome = agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<Company>().barberIncome;
+            income = agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<Company>().income;
             //calculate net income with VAT
             netIncome = price * vat;
             //Debug.Log("Barber netIncome = " + netIncome);
             //add new payment
-            agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<Company>().barberIncome += netIncome;
+            agent.gameObject.GetComponent<Person>().followTarget.target.gameObject.GetComponent<Company>().income += netIncome;
             //Set income to the target barber
-            barbIncomeV3 = new Vector3(0.2f, barberIncome / 300f, 1f);
+            barbIncomeV3 = new Vector3(0.2f, income / 300f, 1f);
            // Debug.Log("Barber cumulated income = " + barberIncome);
             //barbIncomeV3 = new Vector3(1f, 100f, 1f); //test income graphics
             //show barber cumulated income
@@ -133,7 +133,7 @@ public class SimulationController : MonoBehaviour
              
             //add to graph line
             float graphScale = 1f;
-            graph.AddValue(barberIncome * graphScale); //
+            graph.AddValue(income * graphScale); //
 
         }
         //else

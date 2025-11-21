@@ -5,11 +5,17 @@ using UnityEngine;
 public class Company : MonoBehaviour
 {
     public string Name { get; set; }
+
+    public enum CompanyType {barber, bar, hotel, market}
+
+    public CompanyType companyType;
+
+    //public 
     public List<Person> Employees { get; set; }
 
-    public float barberIncome = 10f; //start capital
+    public float income = 10f; //start capital
     
-    float barberExpenses = 0.0001f;
+    float expenses = 0.0001f;
 
     public bool bankruptcy = false;
 
@@ -35,8 +41,8 @@ public class Company : MonoBehaviour
 
     private void Update()
     {
-        barberIncome -= barberExpenses;
-        if (barberIncome < 0) { bankruptcy = true; Debug.Log("Barber " + this + " bankrupted! "); }
+        income -= expenses;
+        if (income < 0) { bankruptcy = true; Debug.Log("Barber " + this + " bankrupted! "); }
         if(bankruptcy)
         {
             GetComponent<SpriteRenderer>().color = Color.red;
